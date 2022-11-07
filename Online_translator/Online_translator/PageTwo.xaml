@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Translate_program.PageTwo">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <Label 
+                   x:Name="text"
+                    TextColor="Black"
+                    ></Label>
+            </ScrollView>
+            <Button Text ="Копировать" TextTransform="Uppercase" Margin="200,0,0,0" BackgroundColor="Orange" TextColor="White"                    
+             Padding="0,0,0,0"
+            Clicked="Button_Clicked2" FontSize="Caption"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
