@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+    
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="Translate_program.MainPage">
 
     <StackLayout>
-        <Frame BackgroundColor="#219603" Padding="24" CornerRadius="0">
-            <Label Text="
-Welcome to translator!" HorizontalTextAlignment="Center" TextColor="White" FontSize="40"/>
-        </Frame>
         <Label Text="Выберите нужные вам языки" FontSize="21" TextColor="Black" Padding="30,10,30,10"/>
         <Label Text="Перевод с:" TextColor="Black" FontSize="Large" />
         <Picker x:Name="Picker1" Margin="115,-40,0,-40" SelectedIndexChanged="Baraban" >
@@ -27,13 +24,11 @@ Welcome to translator!" HorizontalTextAlignment="Center" TextColor="White" FontS
                 <x:String>Pascal</x:String>
             </Picker.Items>
         </Picker>
-        <Editor BackgroundColor="White" HeightRequest="200" Margin="0,70,0,0" Placeholder="Введите текст" x:Name="Editor2" Completed="Baraban3" />
-        <Button Text ="перевести ->" TextTransform="Uppercase" Margin="190,10,0,10" BackgroundColor="Orange" TextColor="White"
+        <Editor BackgroundColor="White" Margin="0,70,0,0" Placeholder="Введите текст" x:Name="Editor2" Completed="Baraban3" />
+        <Button Text ="перевести ->" TextTransform="Uppercase" Margin="190,10,0,10" TextColor="White"
 Padding="0,0,0,0"
-Clicked="Button_Clicked" FontSize="Caption"/>
+Clicked="Button_Clicked" FontSize="Caption" BackgroundColor="#7f3375"/>
     
-        <CheckBox Color="Maroon"/>
-        
         <FlexLayout>
 
 

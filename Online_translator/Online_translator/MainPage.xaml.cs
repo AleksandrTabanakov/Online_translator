@@ -19,8 +19,13 @@ namespace Translate_program
         public MainPage()
         { 
             InitializeComponent();
-            this.Title = "Hello world";
+            this.Title = "Welcome to translator!";
             this.BackgroundColor = Color.Azure;
+            //Получаем размер дисплея нашего андроида
+            var display = DeviceDisplay.MainDisplayInfo;
+            double height = display.Height;
+            double width = display.Width;
+            this.Editor2.HeightRequest = height / 100 * 13;
         }
 
 
@@ -1010,7 +1015,7 @@ namespace Translate_program
 
                                         vtoroyyazyk.RemoveAt(0);
                                         int counter = (vvodsharp.Length - 3) / 2;
-                                        perevodchik(ref vvodsharp, counter);
+                                        translateTypeData(ref vvodsharp, counter);
                                         int counter2 = 0;
                                         int indexer = 1;
                                         while (counter != counter2)
@@ -1057,7 +1062,7 @@ namespace Translate_program
 
                                             vtoroyyazyk.RemoveAt(0);
                                             int counter = (vvodsharp.Length - 3) / 2;
-                                            perevodchik(ref vvodsharp, counter);
+                                            translateTypeData(ref vvodsharp, counter);
                                             int counter2 = 0;
                                             int indexer = 1;
                                             while (counter != counter2)
@@ -1184,7 +1189,7 @@ namespace Translate_program
                                         //    vtoroyyazyk.Add("@vstr`funk`modul`");
                                         //    continue;
                                         //}
-                                        funkciya(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
+                                        mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
 
                                         //__________________________________________________________________________________________________
                                         if (razdeltel[i][j] == ':' && razdeltel[i][j + 1] == '=')
@@ -1227,7 +1232,7 @@ namespace Translate_program
                                     string shifr = "";
                                     for (int j = 0; j < razdeltel[i].Length; j++)
                                     {
-                                        funkciya(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
+                                        mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
                                         if (razdeltel[i][j] == ' ')
                                         {
                                             continue;
@@ -1544,7 +1549,6 @@ namespace Translate_program
                                                 }
                                                 else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
                                                 {
-                                                    int balanser = 1;
                                                     translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
                                                 }
                                                 else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
@@ -1600,7 +1604,7 @@ namespace Translate_program
                     else if (name2 == "C/C++")
                         translator2.Add("}");
                 }
-                else translator2.Add("Данные языки находятся в разработке просим прощения просим прощения просим прощения");
+                else translator2.Add("Данные языки находятся в разработке просим прощения");
                 Navigation.PushAsync(new PageTwo()); 
             }
             else if (name1 == name2 && name1 != "" && name2 != "")
@@ -2069,7 +2073,7 @@ namespace Translate_program
             //            line += $"@razd ' '";
             return line;
         }
-        static void perevodchik(ref string[] vvodsharp, int counter)
+        static void translateTypeData(ref string[] vvodsharp, int counter)
         {
             int ind = 1;
             int counter2 = 0;
@@ -2140,7 +2144,7 @@ namespace Translate_program
                 counter2++;
             }
         }
-        static void funkciya(ref List<string> vtoroyyazyk, ref int j, int i, List<string> razdeltel, ref string simvol)
+        static void mathematicalFunctions(ref List<string> vtoroyyazyk, ref int j, int i, List<string> razdeltel, ref string simvol)
         {
             if (j < razdeltel[i].Length - 3 && (j == 0 || !char.IsLetterOrDigit(razdeltel[i][j - 1])) && razdeltel[i].Substring(j, 2) == "ln" && (razdeltel[i][j + 2] == ' ' || razdeltel[i][j + 2] == '('))
             {
