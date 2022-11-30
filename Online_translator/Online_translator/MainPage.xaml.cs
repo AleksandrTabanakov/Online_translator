@@ -19,7 +19,7 @@ namespace Translate_program
         public MainPage()
         { 
             InitializeComponent();
-            this.Title = "Welcome to translator!";
+          
             this.BackgroundColor = Color.Azure;
             //Получаем размер дисплея нашего андроида
             var display = DeviceDisplay.MainDisplayInfo;

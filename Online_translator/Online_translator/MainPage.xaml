@@ -2,9 +2,14 @@
     
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-x:Class="Translate_program.MainPage">
+x:Class="Translate_program.MainPage" NavigationPage.HasNavigationBar="False">
 
     <StackLayout>
+        
+        <Label BackgroundColor="#013ae7" Text="Welcome to translator!" TextColor="White" FontSize="20" Padding="20,20,0,20" />
+        <Button Text ="FAQ" TextTransform="Uppercase" Margin="260,-55,0,10" TextColor="White"
+
+    Clicked="Button_Clicked" FontSize="Caption" BackgroundColor="#7f3375" CornerRadius="40" HeightRequest="35" />
         <Label Text="Выберите нужные вам языки" FontSize="21" TextColor="Black" Padding="30,10,30,10"/>
         <Label Text="Перевод с:" TextColor="Black" FontSize="Large" />
         <Picker x:Name="Picker1" Margin="115,-40,0,-40" SelectedIndexChanged="Baraban" >
