@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using System.IO;
 
 namespace Translate_program
 {
@@ -34,14 +35,11 @@ namespace Translate_program
 
 
      
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Translate(object sender, EventArgs e)
         {
             
             if (name1 != name2 && name1 != "" && name2 != "" && translator.Count!=0)
             {
-
-               
-                
                 if (name1 == "C/C++" && name2 == "C#")
                 {
                     for (int i = 0; i < translator.Count; i++)
@@ -84,7 +82,7 @@ namespace Translate_program
                         if (c[0] == 'c' && c[1] == 'o' && c[2] == 'u' && c[3] == 't')
                         {
 
-                            vivod += ("Console.WriteLine( ");
+                            vivod += "Console.WriteLine( ";
                             string peremennaya = "";
                             for (int j = 6; j < c.Length; j++)
                             {
@@ -135,6 +133,8 @@ namespace Translate_program
                             string stroka = translator[i];
                             stroka = stroka.Trim();
                             StringBuilder str = new StringBuilder();
+                        if (stroka == "")
+                            continue;
                             str.Append(stroka[0]);
                             for (int st = 1; st < stroka.Length; st++)
                             {
@@ -149,17 +149,24 @@ namespace Translate_program
                                 {
                                     if (vvod != "")
                                     {
-                                        while (vvod[vvod.Length - 1] == ' ')
-                                            vvod = vvod.Remove(vvod.Length - 1);
+                                    while (vvod[vvod.Length - 1] == ' ')
+                                    {
+                                        vvod = vvod.Remove(vvod.Length - 1);
+                                        if (vvod == "")
+                                            break;
+                                    }
                                         razdeltel2.Add(vvod);
-                                        vvod = "";
+                                    if (stroka[j] == '{')
+                                        vvod = "//";
+                                    else vvod = "";
                                     }
                                     else
                                     {
                                         vvod += stroka[j];
                                         while (vvod[vvod.Length - 1] == ' ')
                                             vvod = vvod.Remove(vvod.Length - 1);
-                                        razdeltel2.Add(vvod);
+                                    vvod = "//";
+                                       
                                     }
                                     continue;
                                 }
@@ -684,6 +691,7 @@ namespace Translate_program
                                 }
                                 razdeltel.RemoveAt(0);
                             }
+                            if(razdeltel.Count!=0)
                             razdeltel.RemoveAt(0);
 
                             //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1628,17 +1636,32 @@ namespace Translate_program
                 DisplayAlert("                 Ошибка!", "Вы не выбрали нужные языки.", "ОK");
             }
         }
-        private void Baraban(object sender, EventArgs e)
+        private void FAQ(object sender, EventArgs e)
+        {
+           
+            translator2.Add(@"Вас приветствует переводчик языка в бета - версии.
+Расскажу как пользоваться. На данном этапе можно переводить
+только с Pascal на С++ и C#. Остальные языки находятся в разработке.
+Не следует использовать комментарии - это может привести к ошибке.
+Данная программа пока лишь помогает облегчить вам перевод.В каких - то
+случаях может произойти так, что не все сможет перевестить.
+Очень сложно учесть абсолютно все особенности языка: (
+При вставлении кода, где просят ввести текст также можно скролить.
+Удержите палец на данном блоке и прокручивайте куда вам угодно.
+   ");
+            Navigation.PushAsync(new PageTwo());
+        }
+        private void SelectorUp(object sender, EventArgs e)
         {
             name1 = Picker1.Items[Picker1.SelectedIndex];
         }
-        private void Baraban2(object sender, EventArgs e)
+        private void SelectorDown(object sender, EventArgs e)
         {
             name2 = Picker2.Items[Picker2.SelectedIndex];
         }
-        private void Baraban3(object sender, EventArgs e)
+        private void editorCode(object sender, EventArgs e)
         {
-           
+           if(Editor2.Text!=null)
             translator = Editor2.Text.Split('\n','\r').ToList();
         }
         static void To_downto(string[] rof, ref string na_obchem3, ref string na_obchem4, int i, int ind)
@@ -1785,14 +1808,25 @@ namespace Translate_program
                     if (w == false)
                         pechat += ' ';
                 }
+                else if (Operator(razdeltel[i][j].ToString()))
+                {
+                    if (pechat[pechat.Length - 1] == '}')
+                    {
+                        pechat = pechat.TrimEnd('}');
+                    }
+                    else pechat += "{";
+                    pechat += razdeltel[i][j];
+                }
                 else
                 {
-                    pechat += '{';
+                    if (!Operator(pechat[pechat.Length - 1].ToString()))
+                        pechat += '{';
                     while (j != razdeltel[i].Length && razdeltel[i][j] != ')' && razdeltel[i][j] != ' ' && razdeltel[i][j] != ',')
                     {
                         pechat += razdeltel[i][j];
                         j++;
                     }
+                    if (!Operator(pechat[pechat.Length-1].ToString()))
                     pechat += '}';
                     if (j == razdeltel[i].Length)
                     {
@@ -1810,6 +1844,16 @@ namespace Translate_program
                 }
             }
             return pechat += "\"";
+        }
+        static bool Operator(string znak)
+        {
+            string[] operaciya = { "+" , "-" , "*", "/" };
+            foreach(string sr in operaciya)
+            {
+                if(sr == znak) 
+                    return true;
+            }
+            return false;
         }
         static void Typee(List<string> poisk_var, ref List<string> vtoroy_yazuk, int par)
         {
