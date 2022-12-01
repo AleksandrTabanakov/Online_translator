@@ -11,21 +11,25 @@ namespace Translate_program
 {
     public partial class MainPage : ContentPage
     {
+
         string name1="";
         string name2 = "";
     public static string name3 = "";
         public static List<string> translator = new List<string>();
         public static List<string> translator2 = new List<string>();
         public MainPage()
-        { 
+        {
+            Application.Current.UserAppTheme = OSAppTheme.Light;
             InitializeComponent();
           
-            this.BackgroundColor = Color.Azure;
+        
             //Получаем размер дисплея нашего андроида
             var display = DeviceDisplay.MainDisplayInfo;
             double height = display.Height;
             double width = display.Width;
             this.Editor2.HeightRequest = height / 100 * 13;
+            
+          
         }
 
 
