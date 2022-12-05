@@ -11,17 +11,31 @@ namespace Translate_program
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PageTwo : ContentPage
     {
-       
+        bool flag = false;
         public PageTwo()
         {
             InitializeComponent();
             text.Text = string.Join("\n", MainPage.translator2);
-    //      await Clipboard.SetTextAsync();
+            //      await Clipboard.SetTextAsync();
+            if (MainPage.translator2.Count > 1 && MainPage.translator2[1] == "Rules")
+            {
+                Button2.Text = "Понятно";
+                flag = true;
+            }
             MainPage.translator2.Clear();
         }
         private async void Button_Clicked2(object sender, EventArgs e)
         {
-            await  Clipboard.SetTextAsync(text.Text);
+          
+            if (!flag)
+            {
+                await Clipboard.SetTextAsync(text.Text);
+            }
+            else
+            {
+                await Navigation.PopAsync();
+            }
+            
         }
 
     }

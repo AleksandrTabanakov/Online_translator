@@ -1653,6 +1653,7 @@ namespace Translate_program
 При вставлении кода, где просят ввести текст также можно скролить.
 Удержите палец на данном блоке и прокручивайте куда вам угодно.
    ");
+            translator2.Add("Rules");
             Navigation.PushAsync(new PageTwo());
         }
         private void SelectorUp(object sender, EventArgs e)
