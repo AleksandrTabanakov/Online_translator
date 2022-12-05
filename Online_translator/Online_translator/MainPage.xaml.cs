@@ -33,9 +33,13 @@ namespace Translate_program
           
         }
 
+        private void ClearBox(object sender, EventArgs e)
+        {
+            translator.Clear();
+            Editor2.Text = null;
+        }
 
-     
-        private void Translate(object sender, EventArgs e)
+            private void Translate(object sender, EventArgs e)
         {
             
             if (name1 != name2 && name1 != "" && name2 != "" && translator.Count!=0)

@@ -28,13 +28,17 @@ x:Class="Translate_program.MainPage" NavigationPage.HasNavigationBar="False" Bac
                 <x:String>Pascal</x:String>
             </Picker.Items>
         </Picker>
-   
-    <Editor  BackgroundColor="#7a7db5" TextColor="#000000" Margin="0,70,0,0" Placeholder="Введите текст:"  PlaceholderColor="#000000" x:Name="Editor2" Completed="editorCode" />
-    
-    <Button Text ="перевести ->" TextTransform="Uppercase" Margin="190,10,0,10" TextColor="#000000"
+
+            <Editor  BackgroundColor="#7a7db5" TextColor="#000000" Margin="0,70,0,0" Placeholder="Введите текст:"  PlaceholderColor="#000000" x:Name="Editor2" Completed="editorCode" />
+            <Grid>
+                <Button Text="удалить код" Grid.Row="0" Grid.Column="0"  TextTransform="Uppercase"  TextColor="#000000"
+                Padding="0,0,0,0"
+                Clicked="ClearBox" FontSize="Caption" BackgroundColor="#5a4372"></Button>
+                <Button Text="перевести ->" Grid.Row="0" Grid.Column="1"  TextTransform="Uppercase"  TextColor="#000000"
 Padding="0,0,0,0"
-Clicked="Translate" FontSize="Caption" BackgroundColor="#5a4372"/>
-    
+Clicked="Translate" FontSize="Caption" BackgroundColor="#5a4372"></Button>
+            </Grid>
+
         </StackLayout>  
     </ScrollView>
 </ContentPage>
