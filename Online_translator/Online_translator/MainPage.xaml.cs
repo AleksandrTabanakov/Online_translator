@@ -1409,9 +1409,6 @@ namespace Translate_program
                                     }
                                     if (simvol != "")
                                         vtoroyyazyk.Add(simvol);
-
-
-
                                 }
                                 if (vtoroyyazyk.Count != 0)
                                     translator2.Add("");
@@ -1454,157 +1451,7 @@ namespace Translate_program
                                             translator2[translator2.Count - 1] += "else if(";
                                         else if (vtoroyyazyk[o][0] == '@')
                                         {
-                                            if (name2 == "C#")
-                                            {
-                                                if (vtoroyyazyk[o] == "@vstrfunk_ln")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Log";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_modul")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Abs";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_sin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Sin";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_cos")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Cos";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_celchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Truncate";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_drobchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + "- Math.Truncate";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kor")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Sqrt";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_stepen")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Pow";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
-                                                {
-                                                    string s1 = vtoroyyazyk[o + 1];
-                                                    string left = "Math.Pow(";
-                                                    string right = "";
-                                                    int balanser = 1;
-                                                    int balanser2 = 0;
-                                                    for (int j = 1; j < s1.Length; j++)
-                                                    {
-                                                        if (balanser2 == 1)
-                                                        {
-                                                            right += s1[j];
-                                                            continue;
-                                                        }
-
-                                                        if (s1[j] == '(')
-                                                        {
-                                                            balanser++;
-                                                            left += s1[j];
-                                                        }
-                                                        else if (s1[j] == ')')
-                                                        {
-                                                            balanser--;
-                                                            if (balanser == 0)
-                                                            {
-                                                                balanser2 = 1;
-                                                                left += ",2)";
-                                                                continue;
-                                                            }
-                                                            left += s1[j];
-                                                        }
-                                                        else left += s1[j];
-                                                    }
-                                                    translator2[translator2.Count - 1] += left + right;
-                                                    o++;
-                                                }
-                                            }
-                                            else if (name2 == "C/C++")
-                                            {
-                                                if (vtoroyyazyk[o] == "@vstrfunk_ln")
-                                                {
-                                                    translator2[translator2.Count - 1] += "log";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_modul")
-                                                {
-                                                    translator2[translator2.Count - 1] += "abs";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_sin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "sin";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_cos")
-                                                {
-                                                    translator2[translator2.Count - 1] += "cos";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_celchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += "(int)";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_drobchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + "(int)";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kor")
-                                                {
-                                                    translator2[translator2.Count - 1] += "sqrt";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_stepen")
-                                                {
-                                                    translator2[translator2.Count - 1] += "pow";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
-                                                {
-                                                    string s1 = vtoroyyazyk[o + 1];
-                                                    string left = "pow(";
-                                                    string right = "";
-                                                    int balanser = 1;
-                                                    int balanser2 = 0;
-                                                    for (int j = 1; j < s1.Length; j++)
-                                                    {
-                                                        if (balanser2 == 1)
-                                                        {
-                                                            right += s1[j];
-                                                            continue;
-                                                        }
-
-                                                        if (s1[j] == '(')
-                                                        {
-                                                            balanser++;
-                                                            left += s1[j];
-                                                        }
-                                                        else if (s1[j] == ')')
-                                                        {
-                                                            balanser--;
-                                                            if (balanser == 0)
-                                                            {
-                                                                balanser2 = 1;
-                                                                left += ",2)";
-                                                                continue;
-                                                            }
-                                                            left += s1[j];
-                                                        }
-                                                        else left += s1[j];
-                                                    }
-                                                    translator2[translator2.Count - 1] += left + right;
-                                                    o++;
-                                                }
-
-                                            }
+                                        Pow(name2, ref o, ref translator2, ref vtoroyyazyk);
                                         }
                                         else translator2[translator2.Count - 1] += vtoroyyazyk[o];
                                     }
@@ -1668,6 +1515,99 @@ namespace Translate_program
         {
            if(Editor2.Text!=null)
             translator = Editor2.Text.Split('\n','\r').ToList();
+        }
+        static void Pow(string name2,ref int o, ref List<string> translator2, ref List<string> vtoroyyazyk)
+        {
+            switch (vtoroyyazyk[o])
+            { 
+            case "@vstrfunk_ln":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ? "Math.Log" :"log";
+                    break;
+            }
+                case "@vstrfunk_modul":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ? "Math.Abs" : "abs";
+                        break;
+            }
+                case "@vstrfunk_sin":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ? "Math.Sin":"sin";
+                        break;
+                    }
+                case "@vstrfunk_cos":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ? "Math.Cos" :"cos";
+                        break;
+                    }
+                case "@vstrfunk_celchast":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ? "Math.Truncate" : "(int)";
+                        break;
+                    }
+                case "@vstrfunk_drobchast":
+            {
+                translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + (name2 == "C#" ?  "- Math.Truncate": "(int)");
+                        break;
+                    }
+                case "@vstrfunk_kor":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ?  "Math.Sqrt" : "sqrt";
+                        break;
+                    }
+                case "@vstrfunk_stepen":
+            {
+                translator2[translator2.Count - 1] += name2 == "C#" ? "Math.Pow" : "pow";
+                        break;
+                    }
+                case "@vstrfunk_plusodin":
+            {
+                translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
+                        break;
+                    }
+                case  "@vstrfunk_kvadrat" :
+                    {
+                        string s1 = vtoroyyazyk[o + 1];
+                        string left = name2=="C#" ? "Math.Pow(" : "pow(";
+                        string right = "";
+                        int balanser = 1;
+                        int balanser2 = 0;
+                        for (int j = 1; j < s1.Length; j++)
+                        {
+                            if (balanser2 == 1)
+                            {
+                                right += s1[j];
+                                continue;
+                            }
+
+                            if (s1[j] == '(')
+                            {
+                                balanser++;
+                                left += s1[j];
+                            }
+                            else if (s1[j] == ')')
+                            {
+                                balanser--;
+                                if (balanser == 0)
+                                {
+                                    balanser2 = 1;
+                                    left += ",2)";
+                                    continue;
+                                }
+                                left += s1[j];
+                            }
+                            else left += s1[j];
+                        }
+                        translator2[translator2.Count - 1] += left + right;
+                        o++;
+                        break;
+                    }
+                        default:
+                    {
+
+                        break;
+                    }
+            }
         }
         static void To_downto(string[] rof, ref string na_obchem3, ref string na_obchem4, int i, int ind)
         {
