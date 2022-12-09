@@ -41,74 +41,38 @@ namespace Translate_program
 
             private void Translate(object sender, EventArgs e)
         {
-            
-            if (name1 != name2 && name1 != "" && name2 != "" && translator.Count!=0)
+
+           string checkError = check(name1, name2, translator);
+             if (checkError == "Language=")
             {
+                DisplayAlert("                 Ошибка!", "Выбран одинаковый язык.", "ОK");
+                return;
+            }
+            else if (checkError == "missing text")
+            {
+                DisplayAlert("                 Ошибка!", "Не введен код", "ОK");
+                return;
+            }
+            else if(checkError == "choiceLanguage")
+            {
+                DisplayAlert("                 Ошибка!", "Вы не выбрали нужные языки.", "ОK");
+                return;
+            }
+
+          
                 if (name1 == "C/C++" && name2 == "C#")
                 {
                     for (int i = 0; i < translator.Count; i++)
                     { 
                         string dannye = translator[i];
-                        string vivod = "";
-
                         if (dannye == "")
                         {
                             continue;
                         }
 
                         string c = dannye;
-               
-                        if (c[0] == 'c' && c[1] == 'i' && c[2] == 'n')
-                        {
-                            string peremennaya = "";
-                            for (int j = 5; j < c.Length; j++)
-                            {
-                                if (c[j] == ';')
-                                {
-                                    vivod = peremennaya + "=int.Parse(Console.ReadLine());";
-                                    translator2.Add(vivod);
-                                    break;
-                                }
-                                if (c[j] == '>')
-                                {
-                                    j++;
-                                    vivod = peremennaya + "=int.Parse(Console.ReadLine());";
-                                    translator2.Add(vivod);
-                                    peremennaya = "";
-                                }
-                                else if (c[j]!=' ')
-                                    peremennaya += c[j];
-                            }
-
-                            vivod = "";
-                            continue;
-                        }
-                        if (c[0] == 'c' && c[1] == 'o' && c[2] == 'u' && c[3] == 't')
-                        {
-
-                            vivod += "Console.WriteLine( ";
-                            string peremennaya = "";
-                            for (int j = 6; j < c.Length; j++)
-                            {
-                                if (c[j] == ';')
-                                {
-                                    vivod += peremennaya + " )";
-                                    break;
-                                }
-                                if (c[j] == '<')
-                                {
-                                    j++;
-                                    vivod += peremennaya + "+" + " \" \" " + "+";
-                                    peremennaya = "";
-                                }
-                                else peremennaya += c[j];
-                            }
-                            vivod += ";";
-                            translator2.Add(vivod);
-                            vivod = "";
-                            continue;
-                        }
-                        else translator2.Add(dannye);
+                    if (!inOut(c, ref translator2)) 
+                        translator2.Add(dannye);
                     }
                 }
                 else if(name1=="Pascal"&&(name2=="C#"||name2=="C/C++"))
@@ -119,19 +83,8 @@ namespace Translate_program
                         string vvod = "";
                         int random = 0;
                         List<string> razdeltel2 = new List<string>();
-                        if (name2 == "C#")
-                        {
-                            string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
-                        ,"namespace ConsoleApp1","{","class Program","{","static void Main(string[] args)","{" };
-                            for (int i = 0; i < c.Length; i++)
-                                translator2.Add(c[i]);
-                        }
-                        else if (name2 == "C/C++")
-                        {
-                            string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
-                            for (int i = 0; i < c.Length; i++)
-                                translator2.Add(c[i]);
-                        }
+                        includeLibrary(name2, ref translator2);
+                        
                         for (int i = 0; i < translator.Count; i++)
                         {
                             string stroka = translator[i];
@@ -1192,19 +1145,6 @@ namespace Translate_program
                                             shifr = "";
                                             continue;
                                         }
-
-                                        //________________________________________________________________________________________________________
-                                        //if (j < razdeltel[i].Length - 4 && !char.IsLetterOrDigit(razdeltel[i][j-1]) && razdeltel[i].Substring(j, 3) == "abs" && (razdeltel[i][j + 4] == ' ' || razdeltel[i][j + 4] == '('))
-                                        //{
-                                        //    j += 3;
-                                        //    if (simvol != "" && simvol != " ")
-                                        //    {
-                                        //        vtoroyyazyk.Add(simvol);
-                                        //        simvol = "";
-                                        //    }
-                                        //    vtoroyyazyk.Add("@vstr`funk`modul`");
-                                        //    continue;
-                                        //}
                                         mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
 
                                         //__________________________________________________________________________________________________
@@ -1469,22 +1409,98 @@ namespace Translate_program
                 }
                 else translator2.Add("Данные языки находятся в разработке просим прощения");
                 Navigation.PushAsync(new PageTwo()); 
-            }
-            else if (name1 == name2 && name1 != "" && name2 != "")
+            
+            
+        }
+        static void includeLibrary(string name2, ref List<string> translator2)
+        {
+            if (name2 == "C#")
             {
-                DisplayAlert("                 Ошибка!", "Выбран одинаковый язык.", "ОK");
+                string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
+                        ,"namespace ConsoleApp1","{","class Program","{","static void Main(string[] args)","{" };
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
             }
-            else if (translator.Count != 0)
+            else if (name2 == "C/C++")
             {
-                DisplayAlert("                 Ошибка!", "Не введен код", "ОK");
+                string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
             }
-            else if(translator.Count == 0)
+        }
+
+        static bool inOut(string c, ref List<string> translator2)
+        {
+            string vivod = "";
+            if (c[0] == 'c' && c[1] == 'i' && c[2] == 'n')
             {
-                DisplayAlert("                 Ошибка!", "Вы не ввели текст", "ОK");
+                string peremennaya = "";
+                for (int j = 5; j < c.Length; j++)
+                {
+                    if (c[j] == ';')
+                    {
+                        vivod = peremennaya + "=int.Parse(Console.ReadLine());";
+                        translator2.Add(vivod);
+                        break;
+                    }
+                    if (c[j] == '>')
+                    {
+                        j++;
+                        vivod = peremennaya + "=int.Parse(Console.ReadLine());";
+                        translator2.Add(vivod);
+                        peremennaya = "";
+                    }
+                    else if (c[j] != ' ')
+                        peremennaya += c[j];
+                }
+                vivod = "";
+                return true;
             }
+         else   if (c[0] == 'c' && c[1] == 'o' && c[2] == 'u' && c[3] == 't')
+            {
+
+                vivod += "Console.WriteLine( ";
+                string peremennaya = "";
+                for (int j = 6; j < c.Length; j++)
+                {
+                    if (c[j] == ';')
+                    {
+                        vivod += peremennaya + " )";
+                        break;
+                    }
+                    if (c[j] == '<')
+                    {
+                        j++;
+                        vivod += peremennaya + "+" + " \" \" " + "+";
+                        peremennaya = "";
+                    }
+                    else peremennaya += c[j];
+                }
+                vivod += ";";
+                translator2.Add(vivod);
+                vivod = "";
+                return true;
+            }
+            return false;
+        }
+        static string check(string name1,string name2,List<string>translator)
+        {
+            if (name1 != name2 && name1 != "" && name2 != "" && translator.Count != 0)
+                return "true";
             else
             {
-                DisplayAlert("                 Ошибка!", "Вы не выбрали нужные языки.", "ОK");
+                if (name1 == name2 && name1 != "" && name2 != "")
+                {
+                   return "Language=";
+                }
+                else if (translator.Count == 0)
+                {
+                    return "missing text";
+                }
+                else
+                {
+                   return "choiceLanguage";
+                }
             }
         }
         private void FAQ(object sender, EventArgs e)
