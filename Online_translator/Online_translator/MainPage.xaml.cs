@@ -9,6 +9,27 @@ using Xamarin.Essentials;
 
 namespace Translate_program
 {
+    public class CodePart
+    {
+        List<operation> operations;
+        List<string> properties;
+    }
+    public class OperatorYsloviya:operation
+    {
+        public List<operation> operationsWithTrue;
+        public List<operation> operationsWithFalse;
+        public List<string> properties;
+    } 
+    public class OperatorCycle:operation
+    {
+        public operation yslovie;
+        public List<operation> operations;
+        public List<string> properties;
+    }
+    public class operation
+    {
+        public string formulation;
+    }
     public partial class MainPage : ContentPage
     {
         string name1="";
