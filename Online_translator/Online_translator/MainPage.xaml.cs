@@ -32,7 +32,7 @@ namespace Translate_program
     }
     public partial class MainPage : ContentPage
     {
-        string name1="";
+        string name1 = "";
         string name2 = "";
     public static string name3 = "";
         public static List<string> translator = new List<string>();
@@ -50,139 +50,38 @@ namespace Translate_program
         }
 
 
-     
+
         private void Button_Clicked(object sender, EventArgs e)
         {
-            
-            if (name1 != name2 && name1 != "" && name2 != "" && translator.Count!=0)
+            if (name1 != name2 && name1 != "" && name2 != "" && translator.Count != 0)
             {
-
-               
-                
-                if (name1 == "C/C++" && name2 == "C#")
+                List<string> vtoroy_yazuk = new List<string>();
+                if (name1 == "Pascal")
                 {
+                    //List<string>[] peremen = new List<string>[14];
+                    int until = 0;
+                    string vvod = "";
+                    int random = 0;
+                    List<string> razdeltel2 = new List<string>();
                     for (int i = 0; i < translator.Count; i++)
-                    { 
-                        string dannye = translator[i];
-                        string vivod = "";
-
-                        if (dannye == "")
+                    {
+                        string stroka = translator[i];
+                        stroka = stroka.Trim();
+                        StringBuilder str = new StringBuilder();
+                        str.Append(stroka[0]);
+                        for (int st = 1; st < stroka.Length; st++)
                         {
-                            continue;
+                            if (stroka[st] == ' ' && stroka[st - 1] == ' ')
+                                continue;
+                            str.Append(stroka[st]);
                         }
-
-                        string c = dannye;
-               
-                        if (c[0] == 'c' && c[1] == 'i' && c[2] == 'n')
+                        stroka = str.ToString();
+                        for (int j = 0; j < stroka.Length; j++)
                         {
-                            string peremennaya = "";
-                            for (int j = 5; j < c.Length; j++)
+                            if (stroka[j] == '{' || stroka[j] == '}')
                             {
-                                if (c[j] == ';')
+                                if (vvod != "")
                                 {
-                                    vivod = peremennaya + "=int.Parse(Console.ReadLine());";
-                                    translator2.Add(vivod);
-                                    break;
-                                }
-                                if (c[j] == '>')
-                                {
-                                    j++;
-                                    vivod = peremennaya + "=int.Parse(Console.ReadLine());";
-                                    translator2.Add(vivod);
-                                    peremennaya = "";
-                                }
-                                else if (c[j]!=' ')
-                                    peremennaya += c[j];
-                            }
-
-                            vivod = "";
-                            continue;
-                        }
-                        if (c[0] == 'c' && c[1] == 'o' && c[2] == 'u' && c[3] == 't')
-                        {
-
-                            vivod += ("Console.WriteLine( ");
-                            string peremennaya = "";
-                            for (int j = 6; j < c.Length; j++)
-                            {
-                                if (c[j] == ';')
-                                {
-                                    vivod += peremennaya + " )";
-                                    break;
-                                }
-                                if (c[j] == '<')
-                                {
-                                    j++;
-                                    vivod += peremennaya + "+" + " \" \" " + "+";
-                                    peremennaya = "";
-                                }
-                                else peremennaya += c[j];
-                            }
-                            vivod += ";";
-                            translator2.Add(vivod);
-                            vivod = "";
-                            continue;
-                        }
-                        else translator2.Add(dannye);
-                    }
-                }
-                else if(name1=="Pascal"&&(name2=="C#"||name2=="C/C++"))
-                {
-                    
-                        List<string>[] peremen = new List<string>[14];
-                        int until = 0;
-                        string vvod = "";
-                        int random = 0;
-                        List<string> razdeltel2 = new List<string>();
-                        if (name2 == "C#")
-                        {
-                            string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
-                        ,"namespace ConsoleApp1","{","class Program","{","static void Main(string[] args)","{" };
-                            for (int i = 0; i < c.Length; i++)
-                                translator2.Add(c[i]);
-                        }
-                        else if (name2 == "C/C++")
-                        {
-                            string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
-                            for (int i = 0; i < c.Length; i++)
-                                translator2.Add(c[i]);
-                        }
-                        for (int i = 0; i < translator.Count; i++)
-                        {
-                            string stroka = translator[i];
-                            stroka = stroka.Trim();
-                            StringBuilder str = new StringBuilder();
-                            str.Append(stroka[0]);
-                            for (int st = 1; st < stroka.Length; st++)
-                            {
-                                if (stroka[st] == ' ' && stroka[st - 1] == ' ')
-                                    continue;
-                                str.Append(stroka[st]);
-                            }
-                            stroka = str.ToString();
-                            for (int j = 0; j < stroka.Length; j++)
-                            {
-                                if (stroka[j] == '{' || stroka[j] == '}')
-                                {
-                                    if (vvod != "")
-                                    {
-                                        while (vvod[vvod.Length - 1] == ' ')
-                                            vvod = vvod.Remove(vvod.Length - 1);
-                                        razdeltel2.Add(vvod);
-                                        vvod = "";
-                                    }
-                                    else
-                                    {
-                                        vvod += stroka[j];
-                                        while (vvod[vvod.Length - 1] == ' ')
-                                            vvod = vvod.Remove(vvod.Length - 1);
-                                        razdeltel2.Add(vvod);
-                                    }
-                                    continue;
-                                }
-                                if (stroka[j] == ';')
-                                {
-                                    vvod += stroka[j];
                                     while (vvod[vvod.Length - 1] == ' ')
                                         vvod = vvod.Remove(vvod.Length - 1);
                                     razdeltel2.Add(vvod);
@@ -191,825 +90,699 @@ namespace Translate_program
                                 else
                                 {
                                     vvod += stroka[j];
+                                    while (vvod[vvod.Length - 1] == ' ')
+                                        vvod = vvod.Remove(vvod.Length - 1);
+                                    razdeltel2.Add(vvod);
                                 }
+                                continue;
                             }
-                            if (vvod != "")
+                            if (stroka[j] == ';')
                             {
+                                vvod += stroka[j];
                                 while (vvod[vvod.Length - 1] == ' ')
                                     vvod = vvod.Remove(vvod.Length - 1);
                                 razdeltel2.Add(vvod);
                                 vvod = "";
                             }
-                        }
-
-                        //_____________________________________________________________________________________________________________________________________________________________________________
-                        if (name1 == "Pascal")
-                        {
-                            List<string> razdeltel = new List<string>();
-                            //Разделение на до бегин зен енд;
-                            string stroka3 = "";
-                            for (int i = 0; i < razdeltel2.Count; i++)
+                            else
                             {
-                                razdeltel2[i] = razdeltel2[i].ToLower();
-                                razdeltel2[i] = razdeltel2[i].Trim();
-                                string stroka = razdeltel2[i];
-                                if (stroka3.Length > 0 && stroka3 != " ")
-                                    razdeltel.Add(stroka3);
-                                stroka3 = "";
-                                if (stroka == "do" || stroka == "then" || stroka == "begin" || stroka == "end" || stroka == "end;" || stroka == "repeat")
-                                {
-                                    if (stroka == "do") { stroka3 += "@konec"; razdeltel.Add(stroka3); stroka3 = ""; }
-                                    if (stroka == "then") { stroka3 += "@konec"; razdeltel.Add(stroka3); stroka3 = ""; }
-                                    if (stroka == "begin") { stroka3 += "@openblock"; razdeltel.Add(stroka3); stroka3 = ""; }
-                                    if (stroka == "end") { stroka3 += "@closeblock"; razdeltel.Add(stroka3); stroka3 = ""; }
-                                    if (stroka == "end;") { stroka3 += "@closeblock"; razdeltel.Add(stroka3); stroka3 = ""; }
-                                    if (stroka == "repeat") { stroka3 += "@do"; razdeltel.Add(stroka3); stroka3 = ""; }
-                                    continue;
-                                }
-                                stroka += " ";
+                                vvod += stroka[j];
+                            }
+                        }
+                        if (vvod != "")
+                        {
+                            while (vvod[vvod.Length - 1] == ' ')
+                                vvod = vvod.Remove(vvod.Length - 1);
+                            razdeltel2.Add(vvod);
+                            vvod = "";
+                        }
+                    }
 
-                                stroka3 += stroka[0];
-                                for (int j = 1; j < stroka.Length; j++)
-                                {
-                                    if (j + 2 < stroka.Length)
-                                    {
-                                        if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 2] == '(' || stroka[j + 2] == ' '))
-                                        {
-                                            if (stroka[j] == 'd' && stroka[j + 1] == 'o')
-                                            {
-                                                j++;
-                                                stroka3 += "@konec";
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "";
-                                                continue;
-                                            }
-                                        }
-                                        else if (stroka[j - 1] == 'd' && stroka[j] == 'o' && (stroka[j + 1] == ' ' || stroka[j + 1] == '('))
-                                        {
+                    //_____________________________________________________________________________________________________________________________________________________________________________
+                    if (name1 == "Pascal")
+                    {
+                        List<string> razdeltel = new List<string>();
+                        //Разделение на до бегин зен енд;
+                        string stroka3 = "";
+                        for (int i = 0; i < razdeltel2.Count; i++)
+                        {
+                            razdeltel2[i] = razdeltel2[i].ToLower();
+                            razdeltel2[i] = razdeltel2[i].Trim();
+                            string stroka = razdeltel2[i];
+                            if (stroka3.Length > 0 && stroka3 != " ")
+                                razdeltel.Add(stroka3);
+                            stroka3 = "";
+                            if (stroka == "do" || stroka == "then" || stroka == "begin" || stroka == "end" || stroka == "end;" || stroka == "repeat")
+                            {
+                                if (stroka == "do") { stroka3 += "@konec"; razdeltel.Add(stroka3); stroka3 = ""; }
+                                if (stroka == "then") { stroka3 += "@konec"; razdeltel.Add(stroka3); stroka3 = ""; }
+                                if (stroka == "begin") { stroka3 += "@openblock"; razdeltel.Add(stroka3); stroka3 = ""; }
+                                if (stroka == "end") { stroka3 += "@closeblock"; razdeltel.Add(stroka3); stroka3 = ""; }
+                                if (stroka == "end;") { stroka3 += "@closeblock"; razdeltel.Add(stroka3); stroka3 = ""; }
+                                if (stroka == "repeat") { stroka3 += "@do"; razdeltel.Add(stroka3); stroka3 = ""; }
+                                continue;
+                            }
+                            stroka += " ";
 
-                                            stroka3 = "@closeblock";
-                                            razdeltel.Add(stroka3);
-                                            stroka3 = "";
-                                            continue;
-                                        }
-                                    }
-                                    if (j + 3 < stroka.Length)
+                            stroka3 += stroka[0];
+                            for (int j = 1; j < stroka.Length; j++)
+                            {
+                                if (j + 2 < stroka.Length)
+                                {
+                                    if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 2] == '(' || stroka[j + 2] == ' '))
                                     {
-                                        if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 3] == '(' || stroka[j + 3] == ' '))
-                                        {
-                                            if (stroka[j] == 'e' && stroka[j + 1] == 'n' && stroka[j + 2] == 'd')
-                                            {
-                                                j += 2;
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "@closeblock";
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "";
-                                                continue;
-                                            }
-                                        }
-                                        else if (stroka[j - 1] == 'e' && stroka[j] == 'n' && stroka[j + 1] == 'd' && (stroka[j + 2] == ' ' || stroka[j + 2] == '('))
+                                        if (stroka[j] == 'd' && stroka[j + 1] == 'o')
                                         {
                                             j++;
-                                            stroka3 = "@closeblock";
+                                            stroka3 += "@konec";
                                             razdeltel.Add(stroka3);
                                             stroka3 = "";
                                             continue;
                                         }
                                     }
+                                    else if (stroka[j - 1] == 'd' && stroka[j] == 'o' && (stroka[j + 1] == ' ' || stroka[j + 1] == '('))
+                                    {
 
-                                    if (j + 4 < stroka.Length)
+                                        stroka3 = "@closeblock";
+                                        razdeltel.Add(stroka3);
+                                        stroka3 = "";
+                                        continue;
+                                    }
+                                }
+                                if (j + 3 < stroka.Length)
+                                {
+                                    if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 3] == '(' || stroka[j + 3] == ' '))
                                     {
-                                        if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 4] == '(' || stroka[j + 4] == ' '))
-                                        {
-                                            if (stroka[j] == 't' && stroka[j + 1] == 'h' && stroka[j + 2] == 'e' && stroka[j + 3] == 'n')
-                                            {
-                                                j += 3;
-                                                stroka3 += "@konec";
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "";
-                                                continue;
-                                            }
-                                            if (stroka[j] == 'e' && stroka[j + 1] == 'n' && stroka[j + 2] == 'd' && stroka[j + 3] == ';')
-                                            {
-                                                j += 3;
-                                                stroka3 += "@closeblock";
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "";
-                                                continue;
-                                            }
-                                        }
-                                        else if (stroka[j - 1] == 'e' && stroka[j] == 'n' && stroka[j + 1] == 'd' && stroka[j + 2] == ';' && (stroka[j + 3] == '(' || stroka[j + 3] == ' '))
+                                        if (stroka[j] == 'e' && stroka[j + 1] == 'n' && stroka[j + 2] == 'd')
                                         {
                                             j += 2;
+                                            razdeltel.Add(stroka3);
                                             stroka3 = "@closeblock";
                                             razdeltel.Add(stroka3);
                                             stroka3 = "";
                                             continue;
                                         }
-                                        else if (stroka[j - 1] == 't' && stroka[j] == 'h' && stroka[j + 1] == 'e' && stroka[j + 2] == 'n' && (stroka[j + 3] == '(' || stroka[j + 3] == ' '))
-                                        {
-                                            j += 2;
-                                            stroka3 = "@konec";
-                                            razdeltel.Add(stroka3);
-                                            stroka3 = "";
-                                            continue;
-                                        }
                                     }
-                                    if (j + 5 < stroka.Length)
+                                    else if (stroka[j - 1] == 'e' && stroka[j] == 'n' && stroka[j + 1] == 'd' && (stroka[j + 2] == ' ' || stroka[j + 2] == '('))
                                     {
-                                        if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 5] == '(' || stroka[j + 5] == ' '))
-                                        {
-                                            if (stroka[j] == 'b' && stroka[j + 1] == 'e' && stroka[j + 2] == 'g' && stroka[j + 3] == 'i' && stroka[j + 4] == 'n')
-                                            {
-                                                j += 4;
-                                                if (stroka3 != " " && stroka3 != "")
-                                                    razdeltel.Add(stroka3);
-                                                stroka3 = "@openblock";
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "";
-                                                continue;
-                                            }
-                                        }
-                                        else if (stroka[j - 1] == 'b' && stroka[j] == 'e' && stroka[j + 1] == 'g' && stroka[j + 2] == 'i' && stroka[j + 3] == 'n' && (stroka[j + 4] == '(' || stroka[j + 4] == ' '))
+                                        j++;
+                                        stroka3 = "@closeblock";
+                                        razdeltel.Add(stroka3);
+                                        stroka3 = "";
+                                        continue;
+                                    }
+                                }
+
+                                if (j + 4 < stroka.Length)
+                                {
+                                    if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 4] == '(' || stroka[j + 4] == ' '))
+                                    {
+                                        if (stroka[j] == 't' && stroka[j + 1] == 'h' && stroka[j + 2] == 'e' && stroka[j + 3] == 'n')
                                         {
                                             j += 3;
-                                            if (stroka3 != " " && stroka3 != "")
-                                                stroka3 = "@openblock";
+                                            stroka3 += "@konec";
+                                            razdeltel.Add(stroka3);
+                                            stroka3 = "";
+                                            continue;
+                                        }
+                                        if (stroka[j] == 'e' && stroka[j + 1] == 'n' && stroka[j + 2] == 'd' && stroka[j + 3] == ';')
+                                        {
+                                            j += 3;
+                                            stroka3 += "@closeblock";
                                             razdeltel.Add(stroka3);
                                             stroka3 = "";
                                             continue;
                                         }
                                     }
-                                    if (j + 6 < stroka.Length)
+                                    else if (stroka[j - 1] == 'e' && stroka[j] == 'n' && stroka[j + 1] == 'd' && stroka[j + 2] == ';' && (stroka[j + 3] == '(' || stroka[j + 3] == ' '))
                                     {
-                                        if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 6] == '(' || stroka[j + 6] == ' '))
-                                        {
-                                            if (stroka[j] == 'r' && stroka[j + 1] == 'e' && stroka[j + 2] == 'p' && stroka[j + 3] == 'e' && stroka[j + 4] == 'a' && stroka[j + 5] == 't')
-                                            {
-                                                j += 5;
-                                                if (stroka3 != " " && stroka3 != "")
-                                                    razdeltel.Add(stroka3);
-                                                stroka3 = "@do";
-                                                razdeltel.Add(stroka3);
-                                                stroka3 = "";
-                                                continue;
-                                            }
-                                        }
-                                        else if (stroka[j - 1] == 'r' && stroka[j] == 'e' && stroka[j + 1] == 'p' && stroka[j + 2] == 'e' && stroka[j + 3] == 'a' && stroka[j + 4] == 't' && (stroka[j + 5] == '(' || stroka[j + 5] == ' '))
+                                        j += 2;
+                                        stroka3 = "@closeblock";
+                                        razdeltel.Add(stroka3);
+                                        stroka3 = "";
+                                        continue;
+                                    }
+                                    else if (stroka[j - 1] == 't' && stroka[j] == 'h' && stroka[j + 1] == 'e' && stroka[j + 2] == 'n' && (stroka[j + 3] == '(' || stroka[j + 3] == ' '))
+                                    {
+                                        j += 2;
+                                        stroka3 = "@konec";
+                                        razdeltel.Add(stroka3);
+                                        stroka3 = "";
+                                        continue;
+                                    }
+                                }
+                                if (j + 5 < stroka.Length)
+                                {
+                                    if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 5] == '(' || stroka[j + 5] == ' '))
+                                    {
+                                        if (stroka[j] == 'b' && stroka[j + 1] == 'e' && stroka[j + 2] == 'g' && stroka[j + 3] == 'i' && stroka[j + 4] == 'n')
                                         {
                                             j += 4;
                                             if (stroka3 != " " && stroka3 != "")
-                                                stroka3 = "@do";
+                                                razdeltel.Add(stroka3);
+                                            stroka3 = "@openblock";
                                             razdeltel.Add(stroka3);
                                             stroka3 = "";
                                             continue;
                                         }
                                     }
-                                    if (stroka3 == "" && stroka[j] == ' ')
+                                    else if (stroka[j - 1] == 'b' && stroka[j] == 'e' && stroka[j + 1] == 'g' && stroka[j + 2] == 'i' && stroka[j + 3] == 'n' && (stroka[j + 4] == '(' || stroka[j + 4] == ' '))
+                                    {
+                                        j += 3;
+                                        if (stroka3 != " " && stroka3 != "")
+                                            stroka3 = "@openblock";
+                                        razdeltel.Add(stroka3);
+                                        stroka3 = "";
                                         continue;
-                                    else
-                                        stroka3 += stroka[j];
+                                    }
                                 }
-
+                                if (j + 6 < stroka.Length)
+                                {
+                                    if ((stroka[j - 1] == ' ' || stroka[j - 1] == ')') && (stroka[j + 6] == '(' || stroka[j + 6] == ' '))
+                                    {
+                                        if (stroka[j] == 'r' && stroka[j + 1] == 'e' && stroka[j + 2] == 'p' && stroka[j + 3] == 'e' && stroka[j + 4] == 'a' && stroka[j + 5] == 't')
+                                        {
+                                            j += 5;
+                                            if (stroka3 != " " && stroka3 != "")
+                                                razdeltel.Add(stroka3);
+                                            stroka3 = "@do";
+                                            razdeltel.Add(stroka3);
+                                            stroka3 = "";
+                                            continue;
+                                        }
+                                    }
+                                    else if (stroka[j - 1] == 'r' && stroka[j] == 'e' && stroka[j + 1] == 'p' && stroka[j + 2] == 'e' && stroka[j + 3] == 'a' && stroka[j + 4] == 't' && (stroka[j + 5] == '(' || stroka[j + 5] == ' '))
+                                    {
+                                        j += 4;
+                                        if (stroka3 != " " && stroka3 != "")
+                                            stroka3 = "@do";
+                                        razdeltel.Add(stroka3);
+                                        stroka3 = "";
+                                        continue;
+                                    }
+                                }
+                                if (stroka3 == "" && stroka[j] == ' ')
+                                    continue;
+                                else
+                                    stroka3 += stroka[j];
                             }
 
-                            //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                            //               Обработка вара
-                            List<string> vtoroy_yazuk = new List<string>();
+                        }
 
-                            for (int i = 0; i < razdeltel.Count; i++)
+                        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                        //               Обработка вара
+
+                        for (int i = 0; i < razdeltel.Count; i++)
+                        {
+
+                            var poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', '=', ';', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                            if (poisk_var[0] == "var") //внутри ифа обработка вара
                             {
-
-                                var poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', '=', ';', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                                if (poisk_var[0] == "var") //внутри ифа обработка вара
+                                if (poisk_var.Count == 1)
                                 {
-                                    if (poisk_var.Count == 1)
+                                    razdeltel.RemoveAt(0);
+                                    poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', '=', ';', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                }
+                                else
+                                {
+                                    poisk_var.RemoveAt(0);
+                                }
+                                while (poisk_var[0] != "@openblock")
+                                {
+                                    if (razdeltel[i].Contains("[") || razdeltel[i].Contains("string") || razdeltel[i].Contains("'"))
                                     {
-                                        razdeltel.RemoveAt(0);
-                                        poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', '=', ';', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                                    }
-                                    else
-                                    {
-                                        poisk_var.RemoveAt(0);
-                                    }
-                                    while (poisk_var[0] != "@openblock")
-                                    {
-                                        if (razdeltel[i].Contains("[") || razdeltel[i].Contains("string") || razdeltel[i].Contains("'"))
+                                        if (razdeltel[i].Contains(":") && razdeltel[i].IndexOf(":") < razdeltel[i].IndexOf("string"))
                                         {
-                                            if (razdeltel[i].Contains(":") && razdeltel[i].IndexOf(":") < razdeltel[i].IndexOf("string"))
+                                            if (razdeltel[i].IndexOf("array") == -1)
                                             {
-                                                if (razdeltel[i].IndexOf("array") == -1)
+                                                vtoroy_yazuk.Add("@obyavl #string ");
+                                                vtoroy_yazuk.Add("");
+                                                for (int j = 0; j < poisk_var.Count - 1; j++)
+                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 1] += poisk_var[j] + " ";
+                                            }
+                                            else
+                                            {
+                                                if (razdeltel[i].IndexOf(":") < razdeltel[i].LastIndexOf(","))
                                                 {
-                                                    vtoroy_yazuk.Add("@obyavl #string ");
+                                                    vtoroy_yazuk.Add("@obyavl #arr_2D ");
                                                     vtoroy_yazuk.Add("");
-                                                    for (int j = 0; j < poisk_var.Count - 1; j++)
+                                                    string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
+                                                    string kon = razdeltel[i].Substring(razdeltel[i].IndexOf(".") + 2, razdeltel[i].LastIndexOf(",") - razdeltel[i].IndexOf(".") - 2) + "-";
+                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 1] += nach + " " + kon + "(" + nach + ")" + "+2";
+                                                    nach = razdeltel[i].Substring(razdeltel[i].LastIndexOf(",") + 1, razdeltel[i].LastIndexOf(".") - razdeltel[i].LastIndexOf(",") - 2);
+                                                    kon = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
+                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 2] += nach + " " + kon + "(" + nach + ")" + "+2" + " @obyavl #string ";
+                                                    for (int j = 0; j < poisk_var.Count - 5; j++)
                                                         vtoroy_yazuk[vtoroy_yazuk.Count - 1] += poisk_var[j] + " ";
                                                 }
                                                 else
                                                 {
-                                                    if (razdeltel[i].IndexOf(":") < razdeltel[i].LastIndexOf(","))
-                                                    {
-                                                        vtoroy_yazuk.Add("@obyavl #arr_2D ");
-                                                        vtoroy_yazuk.Add("");
-                                                        string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
-                                                        string kon = razdeltel[i].Substring(razdeltel[i].IndexOf(".") + 2, razdeltel[i].LastIndexOf(",") - razdeltel[i].IndexOf(".") - 2) + "-";
-                                                        vtoroy_yazuk[vtoroy_yazuk.Count - 1] += nach + " " + kon + "(" + nach + ")" + "+2";
-                                                        nach = razdeltel[i].Substring(razdeltel[i].LastIndexOf(",") + 1, razdeltel[i].LastIndexOf(".") - razdeltel[i].LastIndexOf(",") - 2);
-                                                        kon = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
-                                                        vtoroy_yazuk[vtoroy_yazuk.Count - 2] += nach + " " + kon + "(" + nach + ")" + "+2" + " @obyavl #string ";
-                                                        for (int j = 0; j < poisk_var.Count - 5; j++)
-                                                            vtoroy_yazuk[vtoroy_yazuk.Count - 1] += poisk_var[j] + " ";
-                                                    }
-                                                    else
-                                                    {
-                                                        vtoroy_yazuk.Add("@obyavl #arr ");
-                                                        vtoroy_yazuk.Add("");
-                                                        string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
-                                                        string kon = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
-                                                        vtoroy_yazuk[vtoroy_yazuk.Count - 2] += nach + " " + kon + "(" + nach + ")" + "+2" + " @obyavl #string ";
-                                                        for (int j = 0; j < poisk_var.Count - 4; j++)
-                                                            vtoroy_yazuk[vtoroy_yazuk.Count - 1] += poisk_var[j] + " ";
-                                                    }
-                                                }
-                                            }
-                                            else if (razdeltel[i].IndexOf("'") != -1)
-                                            {
-                                                vtoroy_yazuk.Add($"@obyavl #neyavn {poisk_var[0]} ");
-                                                for (int j = razdeltel[i].IndexOf("'") + 1, j1 = razdeltel[i].LastIndexOf("'"); j < j1; j++)
-                                                {
-                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 1] += razdeltel[i][j];
-                                                }
-                                            }
-                                            else if (razdeltel[i].IndexOf("array") != -1)
-                                            {
-                                                if (razdeltel[i].IndexOf(":") < razdeltel[i].LastIndexOf(","))
-                                                {
-                                                    Typee(poisk_var, ref vtoroy_yazuk, 5);
-                                                    string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
-                                                    string kon = razdeltel[i].Substring(razdeltel[i].IndexOf(".") + 2, razdeltel[i].LastIndexOf(",") - razdeltel[i].IndexOf(".") - 2) + "-";
-                                                    string nach1 = razdeltel[i].Substring(razdeltel[i].LastIndexOf(",") + 1, razdeltel[i].LastIndexOf(".") - razdeltel[i].LastIndexOf(",") - 2);
-                                                    string kon1 = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
-                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 2] = "@obyavl #arr_2D " + nach + " " + kon + "(" + nach + ")" + "+2 " + nach1 + " " + kon1 + "(" + nach1 + ")" + "+2 " + vtoroy_yazuk[vtoroy_yazuk.Count - 2];
-                                                }
-                                                else
-                                                {
-                                                    Typee(poisk_var, ref vtoroy_yazuk, 4);
+                                                    vtoroy_yazuk.Add("@obyavl #arr ");
+                                                    vtoroy_yazuk.Add("");
                                                     string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
                                                     string kon = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
-                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 2] = "@obyavl #arr " + nach + " " + kon + "(" + nach + ")" + "+2 " + vtoroy_yazuk[vtoroy_yazuk.Count - 2];
+                                                    vtoroy_yazuk[vtoroy_yazuk.Count - 2] += nach + " " + kon + "(" + nach + ")" + "+2" + " @obyavl #string ";
+                                                    for (int j = 0; j < poisk_var.Count - 4; j++)
+                                                        vtoroy_yazuk[vtoroy_yazuk.Count - 1] += poisk_var[j] + " ";
                                                 }
                                             }
                                         }
-                                        else
-                                            Typee(poisk_var, ref vtoroy_yazuk, 1);
-                                        i++;
-                                        poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', ';', '=', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                                    }
-                                    i--;
-                                }
-                                else if (poisk_var[0] == "const")
-                                {
-                                    if (poisk_var.Count == 1)
-                                    {
-                                        i++;
-                                        poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', '=', ';', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                        else if (razdeltel[i].IndexOf("'") != -1)
+                                        {
+                                            vtoroy_yazuk.Add($"@obyavl #neyavn {poisk_var[0]} ");
+                                            for (int j = razdeltel[i].IndexOf("'") + 1, j1 = razdeltel[i].LastIndexOf("'"); j < j1; j++)
+                                            {
+                                                vtoroy_yazuk[vtoroy_yazuk.Count - 1] += razdeltel[i][j];
+                                            }
+                                        }
+                                        else if (razdeltel[i].IndexOf("array") != -1)
+                                        {
+                                            if (razdeltel[i].IndexOf(":") < razdeltel[i].LastIndexOf(","))
+                                            {
+                                                Typee(poisk_var, ref vtoroy_yazuk, 5);
+                                                string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
+                                                string kon = razdeltel[i].Substring(razdeltel[i].IndexOf(".") + 2, razdeltel[i].LastIndexOf(",") - razdeltel[i].IndexOf(".") - 2) + "-";
+                                                string nach1 = razdeltel[i].Substring(razdeltel[i].LastIndexOf(",") + 1, razdeltel[i].LastIndexOf(".") - razdeltel[i].LastIndexOf(",") - 2);
+                                                string kon1 = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
+                                                vtoroy_yazuk[vtoroy_yazuk.Count - 2] = "@obyavl #arr_2D " + nach + " " + kon + "(" + nach + ")" + "+2 " + nach1 + " " + kon1 + "(" + nach1 + ")" + "+2 " + vtoroy_yazuk[vtoroy_yazuk.Count - 2];
+                                            }
+                                            else
+                                            {
+                                                Typee(poisk_var, ref vtoroy_yazuk, 4);
+                                                string nach = razdeltel[i].Substring(razdeltel[i].IndexOf("[") + 1, razdeltel[i].IndexOf(".") - razdeltel[i].IndexOf("[") - 1);
+                                                string kon = razdeltel[i].Substring(razdeltel[i].LastIndexOf(".") + 1, razdeltel[i].LastIndexOf("]") - razdeltel[i].LastIndexOf(".") - 1) + "-";
+                                                vtoroy_yazuk[vtoroy_yazuk.Count - 2] = "@obyavl #arr " + nach + " " + kon + "(" + nach + ")" + "+2 " + vtoroy_yazuk[vtoroy_yazuk.Count - 2];
+                                            }
+                                        }
                                     }
                                     else
-                                        poisk_var.RemoveAt(0);
-                                    while (poisk_var[0] != "begin" && poisk_var[0] != "var")
-                                    {
-                                        string znach = razdeltel[i].Substring(razdeltel[i].IndexOf("=") + 1); znach = znach.Remove(znach.Length - 1);
-                                        znach = znach.Trim(' '); znach = znach.TrimEnd(' ');
-                                        if (znach[0] == '\'')
-                                        {
-                                            znach.Remove(0, 1);
-                                            znach.Remove(znach.Length - 1);
-                                        }
-                                        vtoroy_yazuk.Add($"@obyavl @const {znach}");
-                                        vtoroy_yazuk.Add(poisk_var[0]);
-                                        i++;
-                                        poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', ';', '=' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                                    }
-                                    i--;
+                                        Typee(poisk_var, ref vtoroy_yazuk, 1);
+                                    i++;
+                                    poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', ';', '=', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                                 }
-                                else if (poisk_var[0] == "@openblock")
-                                    break;
+                                i--;
                             }
-                            for (int i = 0; i < vtoroy_yazuk.Count; i += 2)
+                            else if (poisk_var[0] == "const")
                             {
-                                //    Console.WriteLine(vtoroy_yazuk[i]+ vtoroy_yazuk[i+1]);
-                                if (name2 == "C#" || name2 == "C/C++")
+                                if (poisk_var.Count == 1)
                                 {
-                                    if (vtoroy_yazuk[i].Substring(0, 13) == "@obyavl #arr ")
-
-                                    {
-                                        if (name2 == "C#")
-                                        {
-                                            int[] a = new int[10], b = new int[10];
-                                            // int[] a, b, c;  a = new int[3]; b = new int[4]; c = new int[5];
-                                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0] + "[]");
-                                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                            if (translator22.Length > 1)
-                                            {
-                                                translator2[translator2.Count - 1] += string.Join(",", translator22) + "; ";
-                                                for (int j = 0; j < translator22.Length; j++)
-                                                {
-                                                    translator2[translator2.Count - 1] += translator22[j] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ";";
-                                                }
-                                            }
-                                            else
-                                            {
-                                                translator2[translator2.Count - 1] += translator22[0] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]";
-                                            }
-                                        }
-                                        else if (name2 == "C/C++")
-                                        {
-                                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0]);
-                                            //long A[10], b[10],c[10];
-                                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                            if (translator22.Length > 1)
-                                            {
-                                                for (int j = 0; j < translator22.Length; j++)
-                                                {
-                                                    if (j < translator22.Length - 1)
-                                                        translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ", ";
-                                                    else
-                                                        translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ";";
-                                                }
-                                            }
-                                            else
-                                                translator2[translator2.Count - 1] += translator22[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ";";
-                                        }
-                                        // translator2.Add(massiv(vtoroy_yazuk, i)[0]); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        // translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i].Substring(0, 16) == "@obyavl #arr_2D ")
-                                    {
-                                        //int[,] a = new int[10, 12];
-                                        if (name2 == "C#")
-                                        {
-                                            // int[] a, b, c;  a = new int[3]; b = new int[4]; c = new int[5];
-                                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0] + "[,]");
-                                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                            if (translator22.Length > 1)
-                                            {
-                                                translator2[translator2.Count - 1] += string.Join(",", translator22) + "; ";
-                                                for (int j = 0; j < translator22.Length; j++)
-                                                {
-                                                    translator2[translator2.Count - 1] += translator22[j] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "," + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ";";
-                                                }
-                                            }
-                                            else
-                                            {
-                                                translator2[translator2.Count - 1] += translator22[0] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "," + massiv(vtoroy_yazuk, i, name2)[2] + "]";
-                                            }
-                                        }
-                                        else if (name2 == "C/C++")
-                                        {
-                                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0]);
-                                            //int a[10][12],b[15][13];
-                                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                            if (translator22.Length > 1)
-                                            {
-                                                for (int j = 0; j < translator22.Length; j++)
-                                                {
-                                                    if (j < translator22.Length - 1)
-                                                        translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + "[" + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ", ";
-                                                    else
-                                                        translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + "[" + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ";";
-                                                }
-                                            }
-                                            else
-                                                translator2[translator2.Count - 1] += translator22[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + "[" + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ";";
-                                        }
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #cel_32 ")
-                                    {
-                                        translator2.Add("int "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #drob_48 ")
-                                    {
-                                        translator2.Add("double "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #u_cel_8 ")
-                                    {
-                                        translator2.Add("byte "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #cel_8 ")
-                                    {
-                                        translator2.Add("sbyte "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #cel_16 ")
-                                    {
-                                        translator2.Add("short "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #u_cel_16 ")
-                                    {
-                                        translator2.Add("ushort "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #cel_64 ")
-                                    {
-                                        if (name2 == "C#")
-                                            translator2.Add("long ");
-                                        else if (name2 == "C/C++")
-                                            translator2.Add("long long ");
-                                        string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #u_cel_32 ")
-                                    {
-                                        if (name2 == "C#")
-                                            translator2.Add("uint ");
-                                        else if (name2 == "C/C++")
-                                            translator2.Add("unsigned long ");
-                                        string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #u_cel_64 ")
-                                    {
-                                        if (name2 == "C#")
-                                            translator2.Add("ulong ");
-                                        else if (name2 == "C/C++")
-                                            translator2.Add("unsigned long long ");
-                                        string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-
-                                    else if (vtoroy_yazuk[i] == "@obyavl #simv_16 ")
-                                    {
-                                        translator2.Add("char "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #drob_64 ")
-                                    {
-                                        translator2.Add("double "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #drob_32 ")
-                                    {
-                                        translator2.Add("float "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #logic ")
-                                    {
-                                        translator2.Add("bool "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #string ")
-                                    {
-                                        translator2.Add("string "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i] == "@obyavl #neyavn ")
-                                    {
-                                        translator2.Add("var "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                        if ((int)translator22[1][0] == 39)
-                                        {
-                                            if (translator22[1].Length > 3) //translator2[translator2.Count - 1] += string.Join("", translator22) + ";";
-                                            {
-                                                string zamec = "";
-                                                for (int j = 0; j < translator22[1].Length; j++)
-                                                {
-                                                    if (translator22[1][j] == '\'')
-                                                        zamec += '\"';
-                                                    else zamec += translator22[1][j];
-                                                }
-                                                translator22[1] = zamec;
-                                            }
-                                        }
-                                        translator2[translator2.Count - 1] += string.Join("=", translator22) + ";";
-                                    }
-                                    else if (vtoroy_yazuk[i].Substring(0, 15) == "@obyavl @const ")
-                                    {
-                                        if (name2 == "C#")
-                                        {
-                                            translator2.Add("var " + vtoroy_yazuk[i + 1] + " = "); string[] translator22 = vtoroy_yazuk[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                            translator2[translator2.Count - 1] += (translator22[2] + ";");
-                                        }
-                                        else if (name2 == "C/C++")
-                                        {
-                                            translator2.Add("#define " + vtoroy_yazuk[i + 1] + " "); string[] translator22 = vtoroy_yazuk[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                            translator2[translator2.Count - 1] += (translator22[2]);
-                                        }
-                                    }
+                                    i++;
+                                    poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', '=', ';', '[', ']' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                                 }
-                                razdeltel.RemoveAt(0);
-                            }
-                            razdeltel.RemoveAt(0);
-
-                            //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-                            for (int i = 0; i < razdeltel.Count; i++)
-                            {
-                                StringBuilder sb = new StringBuilder();
-                                for (int je = 0; je < razdeltel[i].Length; je++)
+                                else
+                                    poisk_var.RemoveAt(0);
+                                while (poisk_var[0] != "begin" && poisk_var[0] != "var")
                                 {
+                                    string znach = razdeltel[i].Substring(razdeltel[i].IndexOf("=") + 1); znach = znach.Remove(znach.Length - 1);
+                                    znach = znach.Trim(' '); znach = znach.TrimEnd(' ');
+                                    if (znach[0] == '\'')
+                                    {
+                                        znach.Remove(0, 1);
+                                        znach.Remove(znach.Length - 1);
+                                    }
+                                    vtoroy_yazuk.Add($"@obyavl @const {znach}");
+                                    vtoroy_yazuk.Add(poisk_var[0]);
+                                    i++;
+                                    poisk_var = razdeltel[i].ToLower().Split(new char[] { ' ', ',', ':', ';', '=' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                }
+                                i--;
+                            }
+                            else if (poisk_var[0] == "@openblock")
+                                break;
+                        }
+                        //for (int i = 0; i < vtoroy_yazuk.Count; i += 2)
+                        //{
+                        //    //    Console.WriteLine(vtoroy_yazuk[i]+ vtoroy_yazuk[i+1]);
+                        //    if (name2 == "C#" || name2 == "C/C++")
+                        //    {
+
+
+
+
+
+
+                                
+                                
+                        //    }
+                        //}
+                        razdeltel.RemoveAt(0);
+
+                        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                        for (int i = 0; i < razdeltel.Count; i++)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            for (int je = 0; je < razdeltel[i].Length; je++)
+                            {
+                                if (razdeltel[i][je] == '[')
+                                {
+                                    if (razdeltel[i][je] == '\'')
+                                    {
+                                        break;
+                                    }
                                     if (razdeltel[i][je] == '[')
                                     {
-                                        if (razdeltel[i][je] == '\'')
-                                        {
-                                            break;
-                                        }
-                                        if (razdeltel[i][je] == '[')
-                                        {
 
-                                            while (je != razdeltel[i].Length - 1 && razdeltel[i][je] != '\'' && razdeltel[i][je] != ';')
+                                        while (je != razdeltel[i].Length - 1 && razdeltel[i][je] != '\'' && razdeltel[i][je] != ';')
+                                        {
+                                            if (razdeltel[i][je] == ',')
                                             {
-                                                if (razdeltel[i][je] == ',')
+                                                if (razdeltel[i][je] == ',' && name2 == "C/C++")
                                                 {
-                                                    if (razdeltel[i][je] == ',' && name2 == "C/C++")
-                                                    {
-                                                        sb.Append("-1][");
-                                                    }
-                                                    else sb.Append("-1,");
+                                                    sb.Append("-1][");
+                                                }
+                                                else sb.Append("-1,");
 
 
-                                                }
-                                                else if (razdeltel[i][je] != ']')
-                                                {
-                                                    sb.Append(razdeltel[i][je]);
-                                                }
-                                                else
-                                                {
-                                                    sb.Append("-1]");
-
-                                                    break;
-                                                }
-                                                je++;
                                             }
-                                        }
-                                        continue;
-                                    }
-                                    else sb.Append(razdeltel[i][je]);
-                                }
-                                razdeltel[i] = (sb.ToString());
-                                sb.Clear();
-                            }
-                            for (int i = 0; i < razdeltel.Count; i++)
-                            {
-                                if (razdeltel[i][0] == 'f' && razdeltel[i][1] == 'o' && razdeltel[i][2] == 'r' && razdeltel[i][3] == ' ')
-                                {
+                                            else if (razdeltel[i][je] != ']')
+                                            {
+                                                sb.Append(razdeltel[i][je]);
+                                            }
+                                            else
+                                            {
+                                                sb.Append("-1]");
 
-
-                                    string[] rof = razdeltel[i].ToLower().Split(new string[] { " ", ":=" }, StringSplitOptions.RemoveEmptyEntries);
-                                    string na_obchem1 = "@cycle #pred ";
-                                    string na_obchem2 = "@local_per ";
-                                    string na_obchem3 = "@cyc_if ";
-                                    string na_obchem4 = "@telo ";
-                                    if (rof[1] == "var")
-                                    {
-                                        na_obchem2 += $"@obyavl #neyavn {rof[2]} "; int ind = 3;
-                                        for (; rof[ind] != "to" && rof[ind] != "downto"; ind++)
-                                            na_obchem2 += rof[ind] + " ";
-                                        ind += 1;
-                                        To_downto(rof, ref na_obchem3, ref na_obchem4, 2, ind);
+                                                break;
+                                            }
+                                            je++;
+                                        }
                                     }
-                                    else
-                                    {
-                                        na_obchem4 += $"@prisvoenie {rof[1]} ";
-                                        int ind = 2;
-                                        for (; rof[ind] != "to" && rof[ind] != "downto"; ind++)
-                                            na_obchem4 += rof[ind] + " ";
-                                        ind += 1;
-                                        na_obchem4 += "\n";
-                                        To_downto(rof, ref na_obchem3, ref na_obchem4, 1, ind);
-                                    }
-                                    //  Console.WriteLine(na_obchem1);
-                                    translator2.Add("for (");
-                                    //   Console.WriteLine(na_obchem2);
-                                    if (na_obchem2 != "@local_per ")
-                                    {
-                                        string[] translator22 = na_obchem2.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                                        translator2[translator2.Count - 1] += "var " + translator22[3] + "=";
-                                        for (int u = 4; u < translator22.Length; u++)
-                                        {
-                                            if (translator22[u] == "mod")
-                                                translator2[translator2.Count - 1] += "%";
-                                            else if (translator22[u] == "div")
-                                                translator2[translator2.Count - 1] += "/";
-                                            else translator2[translator2.Count - 1] += translator22[u];
-                                        }
-                                        translator2[translator2.Count - 1] += ";";
-                                        string perepis = "";
-                                        string[] translator23 = na_obchem3.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                                        for (int k = 0; k < translator23[1].Length; k++)
-                                        {
-                                            if (translator23[1][k] != '=')
-                                                perepis += translator23[1][k];
-                                        }
-                                        for (int k = 2; k < translator23.Length; k++)
-                                        {
-                                            if (translator23[k] == "mod")
-                                                perepis += "%";
-                                            else if (translator23[k] == "div")
-                                                perepis += "/";
-                                            else perepis += translator23[k];
-                                        }
-                                        translator2[translator2.Count - 1] += perepis + ";";
-                                        string[] translator24 = na_obchem4.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-                                        if (translator24[2] == "+")
-                                            translator2[translator2.Count - 1] += translator24[1] + "++)";
-                                        else translator2[translator2.Count - 1] += translator24[1] + "--)";
-                                    }
-                                    else
-                                    {
-                                        string[] translator22 = na_obchem4.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                                        translator2[translator2.Count - 1] += translator22[2] + "=";
-                                        for (int u = 3; u < translator22.Length - 3; u++)
-                                        {
-                                            if (translator22[u] == "mod")
-                                                translator2[translator2.Count - 1] += "%";
-                                            else if (translator22[u] == "div")
-                                                translator2[translator2.Count - 1] += "/";
-                                            else translator2[translator2.Count - 1] += translator22[u];
-                                        }
-                                        translator2[translator2.Count - 1] += ";";
-                                        string perepis = "";
-                                        string[] translator23 = na_obchem3.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                                        for (int k = 0; k < translator23[1].Length; k++)
-                                        {
-                                            if (translator23[1][k] != '=')
-                                                perepis += translator23[1][k];
-                                        }
-                                        for (int k = 2; k < translator23.Length; k++)
-                                        {
-                                            if (translator23[k] == "mod")
-                                                perepis += "%";
-                                            else if (translator23[k] == "div")
-                                                perepis += "/";
-                                            else perepis += translator23[k];
-                                        }
-                                        translator2[translator2.Count - 1] += perepis + ";";
-                                        if (translator22[translator22.Length - 2] == "+")
-                                            translator2[translator2.Count - 1] += translator22[translator22.Length - 3] + "++)";
-                                        else translator2[translator2.Count - 1] += translator22[translator22.Length - 3] + "--)";
-                                    }
-                                    //  Console.WriteLine(na_obchem3); 
-                                    //  Console.WriteLine(na_obchem4);
                                     continue;
-
                                 }
-                                List<string> vtoroyyazyk = new List<string>();
-                                if (razdeltel[i].Length > 4 && razdeltel[i].Substring(0, 5) == "print" && (razdeltel[i].Length == 5 || (razdeltel[i].Length > 5 && (razdeltel[i][5] == ' ' || razdeltel[i][5] == '('))))
+                                else sb.Append(razdeltel[i][je]);
+                            }
+                            razdeltel[i] = (sb.ToString());
+                            sb.Clear();
+                        }
+                        for (int i = 0; i < razdeltel.Count; i++)
+                        {
+                            if (razdeltel[i][0] == 'f' && razdeltel[i][1] == 'o' && razdeltel[i][2] == 'r' && razdeltel[i][3] == ' ')
+                            {
+
+
+                                string[] rof = razdeltel[i].ToLower().Split(new string[] { " ", ":=" }, StringSplitOptions.RemoveEmptyEntries);
+                                string na_obchem1 = "@cycle #pred ";
+                                string na_obchem2 = "@local_per ";
+                                string na_obchem3 = "@cyc_if ";
+                                string na_obchem4 = "@telo ";
+                                if (rof[1] == "var")
                                 {
-                                    vtoroyyazyk.Add("@vstr_funk pechat ");
-                                    int index = razdeltel[i].IndexOf('(');
-                                    if (index != -1)
-                                    {
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, false);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        //   Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        if (name2 == "C#")
-                                        {
-
-                                            translator2.Add("Console.Write(" + translator22[1] + ");");
-                                            //   Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                            translator2.Add(si2(translator22));
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        i += 1;
-
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, false);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        //    Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        if (name2 == "C#")
-                                        {
-
-                                            translator2.Add("Console.Write(" + translator22[1] + ");");
-                                            //   Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                            translator2.Add(si2(translator22));
-                                        continue;
-                                    }
+                                    na_obchem2 += $"@obyavl #neyavn {rof[2]} "; int ind = 3;
+                                    for (; rof[ind] != "to" && rof[ind] != "downto"; ind++)
+                                        na_obchem2 += rof[ind] + " ";
+                                    ind += 1;
+                                    To_downto(rof, ref na_obchem3, ref na_obchem4, 2, ind);
                                 }
-                                else if (razdeltel[i].Length > 6 && razdeltel[i].Substring(0, 7) == "println" && (razdeltel[i].Length == 7 || (razdeltel[i].Length > 7 && (razdeltel[i][7] == ' ' || razdeltel[i][7] == '('))))//Если функция Println
+                                else
                                 {
-                                    vtoroyyazyk.Add("@vstr_funk pechat_line ");
-                                    int index = razdeltel[i].IndexOf('(');
-                                    if (index != -1)
-                                    {
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, false);
-                                        //    Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        if (name2 == "C#")
-                                        {
-
-                                            translator2.Add("Console.WriteLine(" + translator22[1] + ");");
-                                            //   Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                        {
-                                            translator2.Add(si(translator22));
-                                        }
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        i += 1;
-
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, false);
-                                        //   Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        if (name2 == "C#")
-                                        {
-
-                                            translator2.Add("Console.WriteLine(" + translator22[1] + ");");
-                                            //    Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                        {
-                                            translator2.Add(si(translator22));
-                                        }
-                                        continue;
-                                    }
+                                    na_obchem4 += $"@prisvoenie {rof[1]} ";
+                                    int ind = 2;
+                                    for (; rof[ind] != "to" && rof[ind] != "downto"; ind++)
+                                        na_obchem4 += rof[ind] + " ";
+                                    ind += 1;
+                                    na_obchem4 += "\n";
+                                    To_downto(rof, ref na_obchem3, ref na_obchem4, 1, ind);
                                 }
-                                else if (razdeltel[i].Length > 4 && razdeltel[i].Substring(0, 5) == "write" && (razdeltel[i].Length == 5 || (razdeltel[i].Length > 5 && (razdeltel[i][5] == ' ' || razdeltel[i][5] == '('))))
+                                //  Console.WriteLine(na_obchem1);
+                                translator2.Add("for (");
+                                //   Console.WriteLine(na_obchem2);
+                                if (na_obchem2 != "@local_per ")
                                 {
-                                    vtoroyyazyk.Add("@vstr_funk pechat ");
-                                    int index = razdeltel[i].IndexOf('(');
-                                    if (index != -1)
+                                    string[] translator22 = na_obchem2.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                                    translator2[translator2.Count - 1] += "var " + translator22[3] + "=";
+                                    for (int u = 4; u < translator22.Length; u++)
                                     {
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, true);
-                                        // Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        if (name2 == "C#")
-                                        {
-                                            translator2.Add("Console.Write(" + translator22[1] + ");");
-                                            // Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                            translator2.Add(si2(translator22));
-                                        continue;
+                                        if (translator22[u] == "mod")
+                                            translator2[translator2.Count - 1] += "%";
+                                        else if (translator22[u] == "div")
+                                            translator2[translator2.Count - 1] += "/";
+                                        else translator2[translator2.Count - 1] += translator22[u];
                                     }
-                                    else
+                                    translator2[translator2.Count - 1] += ";";
+                                    string perepis = "";
+                                    string[] translator23 = na_obchem3.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                                    for (int k = 0; k < translator23[1].Length; k++)
                                     {
-                                        i += 1;
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, true);
-                                        //  Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        if (name2 == "C#")
-                                            translator2.Add("Console.Write(" + translator22[1] + ");");
-                                        if (name2 == "C/C++")
-                                            translator2.Add(si2(translator22));
+                                        if (translator23[1][k] != '=')
+                                            perepis += translator23[1][k];
+                                    }
+                                    for (int k = 2; k < translator23.Length; k++)
+                                    {
+                                        if (translator23[k] == "mod")
+                                            perepis += "%";
+                                        else if (translator23[k] == "div")
+                                            perepis += "/";
+                                        else perepis += translator23[k];
+                                    }
+                                    translator2[translator2.Count - 1] += perepis + ";";
+                                    string[] translator24 = na_obchem4.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                                    if (translator24[2] == "+")
+                                        translator2[translator2.Count - 1] += translator24[1] + "++)";
+                                    else translator2[translator2.Count - 1] += translator24[1] + "--)";
+                                }
+                                else
+                                {
+                                    string[] translator22 = na_obchem4.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                                    translator2[translator2.Count - 1] += translator22[2] + "=";
+                                    for (int u = 3; u < translator22.Length - 3; u++)
+                                    {
+                                        if (translator22[u] == "mod")
+                                            translator2[translator2.Count - 1] += "%";
+                                        else if (translator22[u] == "div")
+                                            translator2[translator2.Count - 1] += "/";
+                                        else translator2[translator2.Count - 1] += translator22[u];
+                                    }
+                                    translator2[translator2.Count - 1] += ";";
+                                    string perepis = "";
+                                    string[] translator23 = na_obchem3.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                                    for (int k = 0; k < translator23[1].Length; k++)
+                                    {
+                                        if (translator23[1][k] != '=')
+                                            perepis += translator23[1][k];
+                                    }
+                                    for (int k = 2; k < translator23.Length; k++)
+                                    {
+                                        if (translator23[k] == "mod")
+                                            perepis += "%";
+                                        else if (translator23[k] == "div")
+                                            perepis += "/";
+                                        else perepis += translator23[k];
+                                    }
+                                    translator2[translator2.Count - 1] += perepis + ";";
+                                    if (translator22[translator22.Length - 2] == "+")
+                                        translator2[translator2.Count - 1] += translator22[translator22.Length - 3] + "++)";
+                                    else translator2[translator2.Count - 1] += translator22[translator22.Length - 3] + "--)";
+                                }
+                                //  Console.WriteLine(na_obchem3); 
+                                //  Console.WriteLine(na_obchem4);
+                                continue;
+
+                            }
+                            List<string> vtoroyyazyk = new List<string>();
+                            if (razdeltel[i].Length > 4 && razdeltel[i].Substring(0, 5) == "print" && (razdeltel[i].Length == 5 || (razdeltel[i].Length > 5 && (razdeltel[i][5] == ' ' || razdeltel[i][5] == '('))))
+                            {
+                                vtoroyyazyk.Add("@vstr_funk pechat ");
+                                int index = razdeltel[i].IndexOf('(');
+                                if (index != -1)
+                                {
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, false);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    //   Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    if (name2 == "C#")
+                                    {
+
+                                        translator2.Add("Console.Write(" + translator22[1] + ");");
+                                        //   Console.WriteLine(translator2[4]);
+                                    }
+                                    if (name2 == "C/C++")
+                                        translator2.Add(si2(translator22));
+                                    continue;
+                                }
+                                else
+                                {
+                                    i += 1;
+
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, false);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    //    Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    if (name2 == "C#")
+                                    {
+
+                                        translator2.Add("Console.Write(" + translator22[1] + ");");
+                                        //   Console.WriteLine(translator2[4]);
+                                    }
+                                    if (name2 == "C/C++")
+                                        translator2.Add(si2(translator22));
+                                    continue;
+                                }
+                            }
+                            else if (razdeltel[i].Length > 6 && razdeltel[i].Substring(0, 7) == "println" && (razdeltel[i].Length == 7 || (razdeltel[i].Length > 7 && (razdeltel[i][7] == ' ' || razdeltel[i][7] == '('))))//Если функция Println
+                            {
+                                vtoroyyazyk.Add("@vstr_funk pechat_line ");
+                                int index = razdeltel[i].IndexOf('(');
+                                if (index != -1)
+                                {
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, false);
+                                    //    Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    if (name2 == "C#")
+                                    {
+
+                                        translator2.Add("Console.WriteLine(" + translator22[1] + ");");
+                                        //   Console.WriteLine(translator2[4]);
+                                    }
+                                    if (name2 == "C/C++")
+                                    {
+                                        translator2.Add(si(translator22));
+                                    }
+                                    continue;
+                                }
+                                else
+                                {
+                                    i += 1;
+
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, false);
+                                    //   Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    if (name2 == "C#")
+                                    {
+
+                                        translator2.Add("Console.WriteLine(" + translator22[1] + ");");
+                                        //    Console.WriteLine(translator2[4]);
+                                    }
+                                    if (name2 == "C/C++")
+                                    {
+                                        translator2.Add(si(translator22));
+                                    }
+                                    continue;
+                                }
+                            }
+                            else if (razdeltel[i].Length > 4 && razdeltel[i].Substring(0, 5) == "write" && (razdeltel[i].Length == 5 || (razdeltel[i].Length > 5 && (razdeltel[i][5] == ' ' || razdeltel[i][5] == '('))))
+                            {
+                                vtoroyyazyk.Add("@vstr_funk pechat ");
+                                int index = razdeltel[i].IndexOf('(');
+                                if (index != -1)
+                                {
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, true);
+                                    // Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    if (name2 == "C#")
+                                    {
+                                        translator2.Add("Console.Write(" + translator22[1] + ");");
+                                        // Console.WriteLine(translator2[4]);
+                                    }
+                                    if (name2 == "C/C++")
+                                        translator2.Add(si2(translator22));
+                                    continue;
+                                }
+                                else
+                                {
+                                    i += 1;
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, true);
+                                    //  Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    if (name2 == "C#")
+                                        translator2.Add("Console.Write(" + translator22[1] + ");");
+                                    if (name2 == "C/C++")
+                                        translator2.Add(si2(translator22));
+                                    //  Console.WriteLine(translator2[4]);
+                                    continue;
+                                }
+                            }
+                            else if (razdeltel[i].Length > 6 && razdeltel[i].Substring(0, 7) == "writeln" && (razdeltel[i].Length == 7 || (razdeltel[i].Length > 7 && (razdeltel[i][7] == ' ' || razdeltel[i][7] == '('))))//Если функция Println
+                            {
+                                vtoroyyazyk.Add("@vstr_funk pechat_line ");
+                                int index = razdeltel[i].IndexOf('(');
+                                if (index != -1)
+                                {
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, true);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    //  Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    if (name2 == "C#")
+                                    {
+
+                                        translator2.Add("Console.WriteLine(" + translator22[1] + ");");
+                                        //    Console.WriteLine(translator2[4]);
+                                    }
+                                    if (name2 == "C/C++")
+                                        translator2.Add(si(translator22));
+                                    continue;
+                                }
+                                else
+                                {
+                                    i += 1;
+
+                                    vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, true);
+                                    string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+                                    // Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
+                                    if (name2 == "C#")
+                                    {
+
+                                        translator2.Add("Console.WriteLine(" + translator22[1] + ");");
                                         //  Console.WriteLine(translator2[4]);
-                                        continue;
                                     }
-                                }
-                                else if (razdeltel[i].Length > 6 && razdeltel[i].Substring(0, 7) == "writeln" && (razdeltel[i].Length == 7 || (razdeltel[i].Length > 7 && (razdeltel[i][7] == ' ' || razdeltel[i][7] == '('))))//Если функция Println
-                                {
-                                    vtoroyyazyk.Add("@vstr_funk pechat_line ");
-                                    int index = razdeltel[i].IndexOf('(');
-                                    if (index != -1)
+                                    if (name2 == "C/C++")
                                     {
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(index, razdeltel, ref i, true);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        //  Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        if (name2 == "C#")
-                                        {
-
-                                            translator2.Add("Console.WriteLine(" + translator22[1] + ");");
-                                            //    Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                            translator2.Add(si(translator22));
-                                        continue;
+                                        translator2.Add(si(translator22));
                                     }
-                                    else
-                                    {
-                                        i += 1;
-
-                                        vtoroyyazyk[vtoroyyazyk.Count - 1] += Vuvod(0, razdeltel, ref i, true);
-                                        string[] translator22 = vtoroyyazyk[vtoroyyazyk.Count - 1].Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-                                        // Console.WriteLine(vtoroyyazyk[vtoroyyazyk.Count - 1]);
-                                        if (name2 == "C#")
-                                        {
-
-                                            translator2.Add("Console.WriteLine(" + translator22[1] + ");");
-                                            //  Console.WriteLine(translator2[4]);
-                                        }
-                                        if (name2 == "C/C++")
-                                        {
-                                            translator2.Add(si(translator22));
-                                        }
-                                        continue;
-                                    }
+                                    continue;
                                 }
-                                else if (razdeltel[i].Length > 3 && razdeltel[i].Substring(0, 4) == "read" && (razdeltel[i].Length > 4 && (razdeltel[i][4] == ' ' || razdeltel[i][4] == '(')))
+                            }
+                            else if (razdeltel[i].Length > 3 && razdeltel[i].Substring(0, 4) == "read" && (razdeltel[i].Length > 4 && (razdeltel[i][4] == ' ' || razdeltel[i][4] == '(')))
+                            {
+                                vtoroyyazyk.Add(Vvod(razdeltel, vtoroyyazyk, vtoroy_yazuk, i, false));
+                                if (name2 == "C/C++")
                                 {
-                                    vtoroyyazyk.Add(Vvod(razdeltel, vtoroyyazyk, vtoroy_yazuk, i, false));
+                                    string[] vvodsi = vtoroyyazyk[0].Split(' ');
+                                    vtoroyyazyk.RemoveAt(0);
+                                    translator2.Add("cin");
+                                    for (int j = 0; j < vvodsi.Length; j++)
+                                    {
+                                        if (vvodsi[j].Length > 0 && vvodsi[j][0] != ' ' && vvodsi[j][0] == '#')
+                                        {
+                                            translator2[translator2.Count - 1] += ">>" + vvodsi[j + 1];
+                                            j++;
+                                        }
+                                    }
+                                    translator2[translator2.Count - 1] += ";";
+                                    continue;
+                                }
+                                else if (name2 == "C#")
+                                {
+                                    string splita = "newsplitnumber_" + random.ToString();
+                                    translator2.Add("string[] " + splita + " = Console.ReadLine().Split(new char[] { ' ' },StringSplitOptions.RemoveEmptyEntries);");
+                                    string[] vvodsharp = vtoroyyazyk[0].Split(' ');
+
+                                    vtoroyyazyk.RemoveAt(0);
+                                    int counter = (vvodsharp.Length - 3) / 2;
+                                    translateTypeData(ref vvodsharp, counter);
+                                    int counter2 = 0;
+                                    int indexer = 1;
+                                    while (counter != counter2)
+                                    {
+                                        indexer += 2;
+                                        if (vvodsharp[indexer - 1] != "string")
+                                            translator2.Add(vvodsharp[indexer] + "=" + vvodsharp[indexer - 1] + ".Parse(" + splita + "[" + counter2.ToString() + "]);");
+                                        else translator2.Add(vvodsharp[indexer] + "=" + splita + "[" + counter2.ToString() + "];");
+                                        counter2++;
+                                    }
+                                    continue;
+                                }
+                            }
+
+                            else if (razdeltel[i].Length > 6 && razdeltel[i].Substring(0, 6) == "readln" && (razdeltel[i].Length > 6 && (razdeltel[i][6] == ' ' || razdeltel[i][6] == '(' || razdeltel[i][6] == ';')))
+                            {
+                                if (razdeltel[i][6] == ';')
+                                {
+                                    vtoroyyazyk.Add("@vstr_funk vvod_null");
+                                    continue;
+                                }
+                                else
+                                {
+                                    vtoroyyazyk.Add(Vvod(razdeltel, vtoroyyazyk, vtoroy_yazuk, i, true));
                                     if (name2 == "C/C++")
                                     {
                                         string[] vvodsi = vtoroyyazyk[0].Split(' ');
@@ -1028,10 +801,6 @@ namespace Translate_program
                                     }
                                     else if (name2 == "C#")
                                     {
-
-
-                                        string splita = "newsplitnumber_" + random.ToString();
-                                        translator2.Add("string[] " + splita + " = Console.ReadLine().Split(new char[] { ' ' },StringSplitOptions.RemoveEmptyEntries);");
                                         string[] vvodsharp = vtoroyyazyk[0].Split(' ');
 
                                         vtoroyyazyk.RemoveAt(0);
@@ -1043,73 +812,200 @@ namespace Translate_program
                                         {
                                             indexer += 2;
                                             if (vvodsharp[indexer - 1] != "string")
-                                                translator2.Add(vvodsharp[indexer] + "=" + vvodsharp[indexer - 1] + ".Parse(" + splita + "[" + counter2.ToString() + "]);");
-                                            else translator2.Add(vvodsharp[indexer] + "=" + splita + "[" + counter2.ToString() + "];");
+                                                translator2.Add(vvodsharp[indexer] + "=" + vvodsharp[indexer - 1] + ".Parse(Console.ReadLine());");
+                                            else translator2.Add(vvodsharp[indexer] + "= Console.ReadLine());");
                                             counter2++;
                                         }
                                         continue;
                                     }
                                 }
+                            }
 
-                                else if (razdeltel[i].Length > 6 && razdeltel[i].Substring(0, 6) == "readln" && (razdeltel[i].Length > 6 && (razdeltel[i][6] == ' ' || razdeltel[i][6] == '(' || razdeltel[i][6] == ';')))
+                            if (razdeltel[i][0] == 'i' && razdeltel[i][1] == 'f' && (razdeltel[i][2] == ' ' || razdeltel[i][2] == '('))
+                            {
+                                vtoroyyazyk.Add("if");
+                                string simvol = "";
+                                string shifr = "";
+                                for (int j = 2; j < razdeltel[i].Length; j++)
                                 {
-                                    if (razdeltel[i][6] == ';')
+                                    if (razdeltel[i][j] == ' ')
                                     {
-                                        vtoroyyazyk.Add("@vstr_funk vvod_null");
                                         continue;
                                     }
-                                    else
+                                    if (j + 3 < razdeltel[i].Length)
                                     {
-                                        vtoroyyazyk.Add(Vvod(razdeltel, vtoroyyazyk, vtoroy_yazuk, i, true));
-                                        if (name2 == "C/C++")
+                                        if ((razdeltel[i][j - 1] == ' ' || razdeltel[i][j - 1] == ')') && (razdeltel[i][j + 3] == '(' || razdeltel[i][j + 3] == ' '))
                                         {
-                                            string[] vvodsi = vtoroyyazyk[0].Split(' ');
-                                            vtoroyyazyk.RemoveAt(0);
-                                            translator2.Add("cin");
-                                            for (int j = 0; j < vvodsi.Length; j++)
+                                            if (razdeltel[i][j] == 'x' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 'r')
                                             {
-                                                if (vvodsi[j].Length > 0 && vvodsi[j][0] != ' ' && vvodsi[j][0] == '#')
-                                                {
-                                                    translator2[translator2.Count - 1] += ">>" + vvodsi[j + 1];
-                                                    j++;
-                                                }
+                                                shifr = "@iskluchauchiyili";
+                                                if (simvol != "")
+                                                    vtoroyyazyk.Add(simvol);
+                                                vtoroyyazyk.Add(shifr);
+                                                simvol = "";
+                                                shifr = "";
+                                                j += 2;
+                                                continue;
                                             }
-                                            translator2[translator2.Count - 1] += ";";
+                                            if (razdeltel[i][j] == 'o' && razdeltel[i][j + 1] == 'r')
+                                            {
+                                                shifr = "@ili";
+                                                if (simvol != "")
+                                                    vtoroyyazyk.Add(simvol);
+                                                vtoroyyazyk.Add(shifr);
+                                                simvol = "";
+                                                shifr = "";
+                                                j += 1;
+                                                continue;
+                                            }
+                                            if (razdeltel[i][j] == 'n' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 't')
+                                            {
+                                                shifr = "@ne";
+                                                if (simvol != "")
+                                                    vtoroyyazyk.Add(simvol);
+                                                vtoroyyazyk.Add(shifr);
+                                                simvol = "";
+                                                shifr = "";
+                                                j += 2;
+                                                continue;
+                                            }
+                                            if (razdeltel[i][j] == 'd' && razdeltel[i][j + 1] == 'i' && razdeltel[i][j + 2] == 'v')
+                                            {
+                                                shifr = "@delenie";
+                                                if (simvol != "")
+                                                    vtoroyyazyk.Add(simvol);
+                                                vtoroyyazyk.Add(shifr);
+                                                simvol = "";
+                                                shifr = "";
+                                                j += 2;
+                                                continue;
+                                            }
+                                            if (razdeltel[i][j] == 'm' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 'd')
+                                            {
+                                                shifr = "@deleniesostatkom";
+                                                if (simvol != "")
+                                                    vtoroyyazyk.Add(simvol);
+                                                vtoroyyazyk.Add(shifr);
+                                                simvol = "";
+                                                shifr = "";
+                                                j += 2;
+                                                continue;
+                                            }
+                                            if (razdeltel[i][j] == 'a' && razdeltel[i][j + 1] == 'n' && razdeltel[i][j + 2] == 'd')
+                                            {
+                                                shifr = "@i";
+                                                if (simvol != "")
+                                                    vtoroyyazyk.Add(simvol);
+                                                vtoroyyazyk.Add(shifr);
+                                                simvol = "";
+                                                shifr = "";
+                                                j += 2;
+                                                continue;
+                                            }
+                                        }
+                                    }
+                                    if (razdeltel[i][j] == '=')
+                                    {
+                                        if (razdeltel[i][j - 1] == '<' || razdeltel[i][j - 1] == '>')
+                                        {
+                                            simvol += "=";
                                             continue;
                                         }
-                                        else if (name2 == "C#")
-                                        {
-                                            string[] vvodsharp = vtoroyyazyk[0].Split(' ');
+                                        shifr = "@sravnenie";
+                                        if (simvol != "")
+                                            vtoroyyazyk.Add(simvol);
+                                        vtoroyyazyk.Add(shifr);
+                                        simvol = "";
+                                        shifr = "";
+                                        continue;
+                                    }
 
-                                            vtoroyyazyk.RemoveAt(0);
-                                            int counter = (vvodsharp.Length - 3) / 2;
-                                            translateTypeData(ref vvodsharp, counter);
-                                            int counter2 = 0;
-                                            int indexer = 1;
-                                            while (counter != counter2)
-                                            {
-                                                indexer += 2;
-                                                if (vvodsharp[indexer - 1] != "string")
-                                                    translator2.Add(vvodsharp[indexer] + "=" + vvodsharp[indexer - 1] + ".Parse(Console.ReadLine());");
-                                                else translator2.Add(vvodsharp[indexer] + "= Console.ReadLine());");
-                                                counter2++;
-                                            }
+                                    //________________________________________________________________________________________________________
+                                    //if (j < razdeltel[i].Length - 4 && !char.IsLetterOrDigit(razdeltel[i][j-1]) && razdeltel[i].Substring(j, 3) == "abs" && (razdeltel[i][j + 4] == ' ' || razdeltel[i][j + 4] == '('))
+                                    //{
+                                    //    j += 3;
+                                    //    if (simvol != "" && simvol != " ")
+                                    //    {
+                                    //        vtoroyyazyk.Add(simvol);
+                                    //        simvol = "";
+                                    //    }
+                                    //    vtoroyyazyk.Add("@vstr`funk`modul`");
+                                    //    continue;
+                                    //}
+                                    mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
+
+                                    //__________________________________________________________________________________________________
+                                    if (razdeltel[i][j] == ':' && razdeltel[i][j + 1] == '=')
+                                    {
+                                        j++;
+                                        shifr = "@prisvaivanie";
+                                        if (simvol != "")
+                                            vtoroyyazyk.Add(simvol);
+                                        vtoroyyazyk.Add(shifr);
+                                        simvol = "";
+                                        shifr = "";
+                                        continue;
+                                    }
+
+                                    if (razdeltel[i][j] == '<' && razdeltel[i][j + 1] == '>')
+                                    {
+                                        j++;
+                                        shifr = "@neravno";
+                                        if (simvol != "")
+                                            vtoroyyazyk.Add(simvol);
+                                        vtoroyyazyk.Add(shifr);
+                                        simvol = "";
+                                        shifr = "";
+                                        continue;
+                                    }
+                                    if (razdeltel[i][j] == '@')
+                                    {
+                                        vtoroyyazyk.Add(simvol);
+                                        simvol = "@";
+                                    }
+                                    else
+                                        simvol += razdeltel[i][j];
+                                }
+                                if (simvol != "")
+                                    vtoroyyazyk.Add(simvol);
+                            }
+                            else
+                            {
+                                string simvol = "";
+                                string shifr = "";
+                                for (int j = 0; j < razdeltel[i].Length; j++)
+                                {
+                                    mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
+                                    if (razdeltel[i][j] == ' ')
+                                    {
+                                        continue;
+                                    }
+                                    if (razdeltel[i] == "until")
+                                    {
+                                        translator2.Add("}");
+                                        razdeltel[i] = "while(!(";
+                                        razdeltel[i + 1] = razdeltel[i] + razdeltel[i + 1];
+                                        razdeltel.RemoveAt(i);
+                                        until = 1;
+                                        i--;
+                                        break;
+                                    }
+                                    if (j + 5 < razdeltel[i].Length)
+                                    {
+                                        if (razdeltel[i][j] == 'u' && razdeltel[i][j + 1] == 'n' && razdeltel[i][j + 2] == 't' && razdeltel[i][j + 3] == 'i' && razdeltel[i][j + 4] == 'l' && (razdeltel[i][j + 5] == ' ' || razdeltel[i][j + 5] == '('))
+                                        {
+                                            if (simvol != "")
+                                                vtoroyyazyk.Add(simvol);
+                                            translator2.Add("}");
+                                            vtoroyyazyk.Add("while(!(");
+                                            until = 1;
+                                            simvol = "";
+                                            j += 4;
                                             continue;
                                         }
                                     }
-                                }
-
-                                if (razdeltel[i][0] == 'i' && razdeltel[i][1] == 'f' && (razdeltel[i][2] == ' ' || razdeltel[i][2] == '('))
-                                {
-                                    vtoroyyazyk.Add("if");
-                                    string simvol = "";
-                                    string shifr = "";
-                                    for (int j = 2; j < razdeltel[i].Length; j++)
+                                    if (j > 1)
                                     {
-                                        if (razdeltel[i][j] == ' ')
-                                        {
-                                            continue;
-                                        }
                                         if (j + 3 < razdeltel[i].Length)
                                         {
                                             if ((razdeltel[i][j - 1] == ' ' || razdeltel[i][j - 1] == ')') && (razdeltel[i][j + 3] == '(' || razdeltel[i][j + 3] == ' '))
@@ -1125,20 +1021,9 @@ namespace Translate_program
                                                     j += 2;
                                                     continue;
                                                 }
-                                                if (razdeltel[i][j] == 'o' && razdeltel[i][j + 1] == 'r')
-                                                {
-                                                    shifr = "@ili";
-                                                    if (simvol != "")
-                                                        vtoroyyazyk.Add(simvol);
-                                                    vtoroyyazyk.Add(shifr);
-                                                    simvol = "";
-                                                    shifr = "";
-                                                    j += 1;
-                                                    continue;
-                                                }
                                                 if (razdeltel[i][j] == 'n' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 't')
                                                 {
-                                                    shifr = "@ne";
+                                                    shifr = "ne";
                                                     if (simvol != "")
                                                         vtoroyyazyk.Add(simvol);
                                                     vtoroyyazyk.Add(shifr);
@@ -1158,6 +1043,7 @@ namespace Translate_program
                                                     j += 2;
                                                     continue;
                                                 }
+
                                                 if (razdeltel[i][j] == 'm' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 'd')
                                                 {
                                                     shifr = "@deleniesostatkom";
@@ -1182,451 +1068,578 @@ namespace Translate_program
                                                 }
                                             }
                                         }
-                                        if (razdeltel[i][j] == '=')
-                                        {
-                                            if (razdeltel[i][j - 1] == '<' || razdeltel[i][j - 1] == '>')
-                                            {
-                                                simvol += "=";
-                                                continue;
-                                            }
-                                            shifr = "@sravnenie";
-                                            if (simvol != "")
-                                                vtoroyyazyk.Add(simvol);
-                                            vtoroyyazyk.Add(shifr);
-                                            simvol = "";
-                                            shifr = "";
-                                            continue;
-                                        }
-
-                                        //________________________________________________________________________________________________________
-                                        //if (j < razdeltel[i].Length - 4 && !char.IsLetterOrDigit(razdeltel[i][j-1]) && razdeltel[i].Substring(j, 3) == "abs" && (razdeltel[i][j + 4] == ' ' || razdeltel[i][j + 4] == '('))
-                                        //{
-                                        //    j += 3;
-                                        //    if (simvol != "" && simvol != " ")
-                                        //    {
-                                        //        vtoroyyazyk.Add(simvol);
-                                        //        simvol = "";
-                                        //    }
-                                        //    vtoroyyazyk.Add("@vstr`funk`modul`");
-                                        //    continue;
-                                        //}
-                                        mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
-
-                                        //__________________________________________________________________________________________________
-                                        if (razdeltel[i][j] == ':' && razdeltel[i][j + 1] == '=')
-                                        {
-                                            j++;
-                                            shifr = "@prisvaivanie";
-                                            if (simvol != "")
-                                                vtoroyyazyk.Add(simvol);
-                                            vtoroyyazyk.Add(shifr);
-                                            simvol = "";
-                                            shifr = "";
-                                            continue;
-                                        }
-
-                                        if (razdeltel[i][j] == '<' && razdeltel[i][j + 1] == '>')
-                                        {
-                                            j++;
-                                            shifr = "@neravno";
-                                            if (simvol != "")
-                                                vtoroyyazyk.Add(simvol);
-                                            vtoroyyazyk.Add(shifr);
-                                            simvol = "";
-                                            shifr = "";
-                                            continue;
-                                        }
-                                        if (razdeltel[i][j] == '@')
-                                        {
-                                            vtoroyyazyk.Add(simvol);
-                                            simvol = "@";
-                                        }
-                                        else
-                                            simvol += razdeltel[i][j];
                                     }
-                                    if (simvol != "")
-                                        vtoroyyazyk.Add(simvol);
-                                }
-                                else
-                                {
-                                    string simvol = "";
-                                    string shifr = "";
-                                    for (int j = 0; j < razdeltel[i].Length; j++)
+                                    if (razdeltel[i][j] == '=')
                                     {
-                                        mathematicalFunctions(ref vtoroyyazyk, ref j, i, razdeltel, ref simvol);
-                                        if (razdeltel[i][j] == ' ')
-                                        {
-                                            continue;
-                                        }
-                                        if (razdeltel[i] == "until")
-                                        {
-                                            translator2.Add("}");
-                                            razdeltel[i] = "while(!(";
-                                            razdeltel[i + 1] = razdeltel[i] + razdeltel[i + 1];
-                                            razdeltel.RemoveAt(i);
-                                            until = 1;
-                                            i--;
-                                            break;
-                                        }
-                                        if (j + 5 < razdeltel[i].Length)
-                                        {
-                                            if (razdeltel[i][j] == 'u' && razdeltel[i][j + 1] == 'n' && razdeltel[i][j + 2] == 't' && razdeltel[i][j + 3] == 'i' && razdeltel[i][j + 4] == 'l' && (razdeltel[i][j + 5] == ' ' || razdeltel[i][j + 5] == '('))
-                                            {
-                                                if (simvol != "")
-                                                    vtoroyyazyk.Add(simvol);
-                                                translator2.Add("}");
-                                                vtoroyyazyk.Add("while(!(");
-                                                until = 1;
-                                                simvol = "";
-                                                shifr = "";
-                                                j += 4;
-                                                continue;
-                                            }
-                                        }
-                                        if (j > 1)
-                                        {
-                                            if (j + 3 < razdeltel[i].Length)
-                                            {
-                                                if ((razdeltel[i][j - 1] == ' ' || razdeltel[i][j - 1] == ')') && (razdeltel[i][j + 3] == '(' || razdeltel[i][j + 3] == ' '))
-                                                {
-                                                    if (razdeltel[i][j] == 'x' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 'r')
-                                                    {
-                                                        shifr = "@iskluchauchiyili";
-                                                        if (simvol != "")
-                                                            vtoroyyazyk.Add(simvol);
-                                                        vtoroyyazyk.Add(shifr);
-                                                        simvol = "";
-                                                        shifr = "";
-                                                        j += 2;
-                                                        continue;
-                                                    }
-                                                    if (razdeltel[i][j] == 'n' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 't')
-                                                    {
-                                                        shifr = "ne";
-                                                        if (simvol != "")
-                                                            vtoroyyazyk.Add(simvol);
-                                                        vtoroyyazyk.Add(shifr);
-                                                        simvol = "";
-                                                        shifr = "";
-                                                        j += 2;
-                                                        continue;
-                                                    }
-                                                    if (razdeltel[i][j] == 'd' && razdeltel[i][j + 1] == 'i' && razdeltel[i][j + 2] == 'v')
-                                                    {
-                                                        shifr = "@delenie";
-                                                        if (simvol != "")
-                                                            vtoroyyazyk.Add(simvol);
-                                                        vtoroyyazyk.Add(shifr);
-                                                        simvol = "";
-                                                        shifr = "";
-                                                        j += 2;
-                                                        continue;
-                                                    }
-
-                                                    if (razdeltel[i][j] == 'm' && razdeltel[i][j + 1] == 'o' && razdeltel[i][j + 2] == 'd')
-                                                    {
-                                                        shifr = "@deleniesostatkom";
-                                                        if (simvol != "")
-                                                            vtoroyyazyk.Add(simvol);
-                                                        vtoroyyazyk.Add(shifr);
-                                                        simvol = "";
-                                                        shifr = "";
-                                                        j += 2;
-                                                        continue;
-                                                    }
-                                                    if (razdeltel[i][j] == 'a' && razdeltel[i][j + 1] == 'n' && razdeltel[i][j + 2] == 'd')
-                                                    {
-                                                        shifr = "@i";
-                                                        if (simvol != "")
-                                                            vtoroyyazyk.Add(simvol);
-                                                        vtoroyyazyk.Add(shifr);
-                                                        simvol = "";
-                                                        shifr = "";
-                                                        j += 2;
-                                                        continue;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        if (razdeltel[i][j] == '=')
-                                        {
-                                            shifr = "@sravnenie";
-                                            if (simvol != "")
-                                                vtoroyyazyk.Add(simvol);
-                                            vtoroyyazyk.Add(shifr);
-                                            simvol = "";
-                                            shifr = "";
-                                            continue;
-                                        }
-                                        if (razdeltel[i][j] == ':' && razdeltel[i][j + 1] == '=')
-                                        {
-                                            j++;
-                                            shifr = "@prisvaivanie";
-                                            if (simvol != "")
-                                                vtoroyyazyk.Add(simvol);
-                                            vtoroyyazyk.Add(shifr);
-                                            simvol = "";
-                                            shifr = "";
-                                            continue;
-                                        }
-
-                                        if (razdeltel[i][j] == '<' && razdeltel[i][j + 1] == '>')
-                                        {
-                                            j++;
-                                            shifr = "@neravno";
-                                            if (simvol != "")
-                                                vtoroyyazyk.Add(simvol);
-                                            vtoroyyazyk.Add(shifr);
-                                            simvol = "";
-                                            shifr = "";
-                                            continue;
-                                        }
-                                        if (j + 8 < razdeltel[i].Length)
-                                        {
-                                            if (razdeltel[i][j] == 'e' && razdeltel[i][j + 1] == 'l' && razdeltel[i][j + 2] == 's' && razdeltel[i][j + 3] == 'e' && razdeltel[i][j + 4] == ' ' && razdeltel[i][j + 5] == 'i' && razdeltel[i][j + 6] == 'f' && razdeltel[i][j + 7] == ' ')
-                                            {
-                                                j += 7;
-                                                string elseif = "else if ";
-                                                vtoroyyazyk.Add(elseif);
-                                                continue;
-                                            }
-                                        }
-                                        if (j + 4 < razdeltel[i].Length)
-                                        {
-                                            if (razdeltel[i][j] == 'e' && razdeltel[i][j + 1] == 'l' && razdeltel[i][j + 2] == 's' && razdeltel[i][j + 3] == 'e' && razdeltel[i][j + 4] == ' ')
-                                            {
-                                                string else2 = "else";
-                                                j += 4;
-                                                vtoroyyazyk.Add(else2);
-                                                continue;
-                                            }
-                                        }
-                                        if (razdeltel[i][j] == '@')
-                                        {
+                                        if (simvol != "")
                                             vtoroyyazyk.Add(simvol);
-                                            simvol = "@";
-                                        }
-                                        else if (razdeltel[i][j] == ';' && until == 1)
-                                        {
-                                            simvol += "));";
-                                        }
-                                        else simvol += razdeltel[i][j];
-                                    }
-                                    if (simvol != "")
-                                        vtoroyyazyk.Add(simvol);
-
-
-
-                                }
-                                if (vtoroyyazyk.Count != 0)
-                                    translator2.Add("");
-                                for (int o = 0; o < vtoroyyazyk.Count; o++)
-                                {
-                                    if (vtoroyyazyk[o] == "" || vtoroyyazyk[o] == " ")
+                                        vtoroyyazyk.Add("@sravnenie");
+                                        simvol = "";
                                         continue;
-                                    if (name2 == "C#" || name2 == "C/C++")
+                                    }
+                                    if (razdeltel[i][j] == ':' && razdeltel[i][j + 1] == '=')
                                     {
-                                        if (vtoroyyazyk[o] == "if")
-                                            translator2[translator2.Count - 1] += (vtoroyyazyk[o] + "(");
+                                        j++;
+                                        if (simvol != "")
+                                            vtoroyyazyk.Add(simvol);
+                                        vtoroyyazyk.Add("@prisvaivanie");
+                                        simvol = "";
+                                        continue;
+                                    }
 
-                                        else if (vtoroyyazyk[o] == "@iskluchauchiyili")
-                                            translator2[translator2.Count - 1] += '^';
-                                        else if (vtoroyyazyk[o] == "@ne")
-                                            translator2[translator2.Count - 1] += '!';
-                                        else if (vtoroyyazyk[o] == "@delenie")
-                                            translator2[translator2.Count - 1] += '/';
-                                        else if (vtoroyyazyk[o] == "@deleniesostatkom")
-                                            translator2[translator2.Count - 1] += '%';
-                                        else if (vtoroyyazyk[o] == "@i")
-                                            translator2[translator2.Count - 1] += "&&";
-                                        else if (vtoroyyazyk[o] == "@sravnenie")
-                                            translator2[translator2.Count - 1] += "==";
-                                        else if (vtoroyyazyk[o] == "@prisvaivanie")
-                                            translator2[translator2.Count - 1] += '=';
-                                        else if (vtoroyyazyk[o] == "@neravno")
-                                            translator2[translator2.Count - 1] += "!=";
-                                        else if (vtoroyyazyk[o] == "@konec")
-                                            translator2[translator2.Count - 1] += ')';
-                                        else if (vtoroyyazyk[o] == "@ili")
-                                            translator2[translator2.Count - 1] += "||";
-                                        else if (vtoroyyazyk[o] == "@openblock")
-                                            translator2[translator2.Count - 1] += '{';
-                                        else if (vtoroyyazyk[o] == "@closeblock")
-                                            translator2[translator2.Count - 1] += '}';
-                                        else if (vtoroyyazyk[o] == "@do")
-                                            translator2[translator2.Count - 1] += "do{";
-                                        else if (vtoroyyazyk[o] == "else if ")
-                                            translator2[translator2.Count - 1] += "else if(";
-                                        else if (vtoroyyazyk[o][0] == '@')
+                                    if (razdeltel[i][j] == '<' && razdeltel[i][j + 1] == '>')
+                                    {
+                                        j++;
+                                        if (simvol != "")
+                                            vtoroyyazyk.Add(simvol);
+                                        vtoroyyazyk.Add("@neravno");
+                                        simvol = "";
+                                        continue;
+                                    }
+                                    if (j + 8 < razdeltel[i].Length)
+                                    {
+                                        if (razdeltel[i][j] == 'e' && razdeltel[i][j + 1] == 'l' && razdeltel[i][j + 2] == 's' && razdeltel[i][j + 3] == 'e' && razdeltel[i][j + 4] == ' ' && razdeltel[i][j + 5] == 'i' && razdeltel[i][j + 6] == 'f' && razdeltel[i][j + 7] == ' ')
                                         {
-                                            if (name2 == "C#")
-                                            {
-                                                if (vtoroyyazyk[o] == "@vstrfunk_ln")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Log";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_modul")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Abs";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_sin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Sin";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_cos")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Cos";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_celchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Truncate";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_drobchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + "- Math.Truncate";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kor")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Sqrt";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_stepen")
-                                                {
-                                                    translator2[translator2.Count - 1] += "Math.Pow";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
-                                                {
-                                                    string s1 = vtoroyyazyk[o + 1];
-                                                    string left = "Math.Pow(";
-                                                    string right = "";
-                                                    int balanser = 1;
-                                                    int balanser2 = 0;
-                                                    for (int j = 1; j < s1.Length; j++)
-                                                    {
-                                                        if (balanser2 == 1)
-                                                        {
-                                                            right += s1[j];
-                                                            continue;
-                                                        }
+                                            j += 7;
+                                            string elseif = "else if ";
+                                            vtoroyyazyk.Add(elseif);
+                                            continue;
+                                        }
+                                    }
+                                    if (j + 4 < razdeltel[i].Length)
+                                    {
+                                        if (razdeltel[i][j] == 'e' && razdeltel[i][j + 1] == 'l' && razdeltel[i][j + 2] == 's' && razdeltel[i][j + 3] == 'e' && razdeltel[i][j + 4] == ' ')
+                                        {
+                                            string else2 = "else";
+                                            j += 4;
+                                            vtoroyyazyk.Add(else2);
+                                            continue;
+                                        }
+                                    }
+                                    if (razdeltel[i][j] == '@')
+                                    {
+                                        vtoroyyazyk.Add(simvol);
+                                        simvol = "@";
+                                    }
+                                    else if (razdeltel[i][j] == ';' && until == 1)
+                                    {
+                                        simvol += "));";
+                                    }
+                                    else simvol += razdeltel[i][j];
+                                }
+                                if (simvol != "")
+                                    vtoroyyazyk.Add(simvol);
+                            }
+                            if (vtoroyyazyk.Count != 0)
+                                translator2.Add("");
+                            for (int o = 0; o < vtoroyyazyk.Count; o++)
+                            {
+                                if (vtoroyyazyk[o] == "" || vtoroyyazyk[o] == " ")
+                                    continue;
+                                if (name2 == "C#" || name2 == "C/C++")
+                                {
+                                    if (vtoroyyazyk[o] == "if")
+                                        translator2[translator2.Count - 1] += (vtoroyyazyk[o] + "(");
 
-                                                        if (s1[j] == '(')
-                                                        {
-                                                            balanser++;
-                                                            left += s1[j];
-                                                        }
-                                                        else if (s1[j] == ')')
-                                                        {
-                                                            balanser--;
-                                                            if (balanser == 0)
-                                                            {
-                                                                balanser2 = 1;
-                                                                left += ",2)";
-                                                                continue;
-                                                            }
-                                                            left += s1[j];
-                                                        }
-                                                        else left += s1[j];
-                                                    }
-                                                    translator2[translator2.Count - 1] += left + right;
-                                                    o++;
-                                                }
+                                    else if (vtoroyyazyk[o] == "@iskluchauchiyili")
+                                        translator2[translator2.Count - 1] += '^';
+                                    else if (vtoroyyazyk[o] == "@ne")
+                                        translator2[translator2.Count - 1] += '!';
+                                    else if (vtoroyyazyk[o] == "@delenie")
+                                        translator2[translator2.Count - 1] += '/';
+                                    else if (vtoroyyazyk[o] == "@deleniesostatkom")
+                                        translator2[translator2.Count - 1] += '%';
+                                    else if (vtoroyyazyk[o] == "@i")
+                                        translator2[translator2.Count - 1] += "&&";
+                                    else if (vtoroyyazyk[o] == "@sravnenie")
+                                        translator2[translator2.Count - 1] += "==";
+                                    else if (vtoroyyazyk[o] == "@prisvaivanie")
+                                        translator2[translator2.Count - 1] += '=';
+                                    else if (vtoroyyazyk[o] == "@neravno")
+                                        translator2[translator2.Count - 1] += "!=";
+                                    else if (vtoroyyazyk[o] == "@konec")
+                                        translator2[translator2.Count - 1] += ')';
+                                    else if (vtoroyyazyk[o] == "@ili")
+                                        translator2[translator2.Count - 1] += "||";
+                                    else if (vtoroyyazyk[o] == "@openblock")
+                                        translator2[translator2.Count - 1] += '{';
+                                    else if (vtoroyyazyk[o] == "@closeblock")
+                                        translator2[translator2.Count - 1] += '}';
+                                    else if (vtoroyyazyk[o] == "@do")
+                                        translator2[translator2.Count - 1] += "do{";
+                                    else if (vtoroyyazyk[o] == "else if ")
+                                        translator2[translator2.Count - 1] += "else if(";
+                                    else if (vtoroyyazyk[o][0] == '@')
+                                    {
+                                        if (name2 == "C#")
+                                        {
+                                            if (vtoroyyazyk[o] == "@vstrfunk_ln")
+                                            {
+                                                translator2[translator2.Count - 1] += "Math.Log";
                                             }
-                                            else if (name2 == "C/C++")
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_modul")
                                             {
-                                                if (vtoroyyazyk[o] == "@vstrfunk_ln")
+                                                translator2[translator2.Count - 1] += "Math.Abs";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_sin")
+                                            {
+                                                translator2[translator2.Count - 1] += "Math.Sin";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_cos")
+                                            {
+                                                translator2[translator2.Count - 1] += "Math.Cos";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_celchast")
+                                            {
+                                                translator2[translator2.Count - 1] += "Math.Truncate";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_drobchast")
+                                            {
+                                                translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + "- Math.Truncate";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_kor")
+                                            {
+                                                translator2[translator2.Count - 1] += "Math.Sqrt";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_stepen")
+                                            {
+                                                translator2[translator2.Count - 1] += "Math.Pow";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
+                                            {
+                                                translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
+                                            {
+                                                string s1 = vtoroyyazyk[o + 1];
+                                                string left = "Math.Pow(";
+                                                string right = "";
+                                                int balanser = 1;
+                                                int balanser2 = 0;
+                                                for (int j = 1; j < s1.Length; j++)
                                                 {
-                                                    translator2[translator2.Count - 1] += "log";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_modul")
-                                                {
-                                                    translator2[translator2.Count - 1] += "abs";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_sin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "sin";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_cos")
-                                                {
-                                                    translator2[translator2.Count - 1] += "cos";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_celchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += "(int)";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_drobchast")
-                                                {
-                                                    translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + "(int)";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kor")
-                                                {
-                                                    translator2[translator2.Count - 1] += "sqrt";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_stepen")
-                                                {
-                                                    translator2[translator2.Count - 1] += "pow";
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
-                                                {
-                                                    translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
-                                                }
-                                                else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
-                                                {
-                                                    string s1 = vtoroyyazyk[o + 1];
-                                                    string left = "pow(";
-                                                    string right = "";
-                                                    int balanser = 1;
-                                                    int balanser2 = 0;
-                                                    for (int j = 1; j < s1.Length; j++)
+                                                    if (balanser2 == 1)
                                                     {
-                                                        if (balanser2 == 1)
+                                                        right += s1[j];
+                                                        continue;
+                                                    }
+
+                                                    if (s1[j] == '(')
+                                                    {
+                                                        balanser++;
+                                                        left += s1[j];
+                                                    }
+                                                    else if (s1[j] == ')')
+                                                    {
+                                                        balanser--;
+                                                        if (balanser == 0)
                                                         {
-                                                            right += s1[j];
+                                                            balanser2 = 1;
+                                                            left += ",2)";
                                                             continue;
                                                         }
-
-                                                        if (s1[j] == '(')
-                                                        {
-                                                            balanser++;
-                                                            left += s1[j];
-                                                        }
-                                                        else if (s1[j] == ')')
-                                                        {
-                                                            balanser--;
-                                                            if (balanser == 0)
-                                                            {
-                                                                balanser2 = 1;
-                                                                left += ",2)";
-                                                                continue;
-                                                            }
-                                                            left += s1[j];
-                                                        }
-                                                        else left += s1[j];
+                                                        left += s1[j];
                                                     }
-                                                    translator2[translator2.Count - 1] += left + right;
-                                                    o++;
+                                                    else left += s1[j];
                                                 }
-
+                                                translator2[translator2.Count - 1] += left + right;
+                                                o++;
                                             }
                                         }
-                                        else translator2[translator2.Count - 1] += vtoroyyazyk[o];
-                                    }
-                                    //       Console.WriteLine(vtoroyyazyk[o]);
-                                }
+                                        else if (name2 == "C/C++")
+                                        {
+                                            if (vtoroyyazyk[o] == "@vstrfunk_ln")
+                                            {
+                                                translator2[translator2.Count - 1] += "log";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_modul")
+                                            {
+                                                translator2[translator2.Count - 1] += "abs";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_sin")
+                                            {
+                                                translator2[translator2.Count - 1] += "sin";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_cos")
+                                            {
+                                                translator2[translator2.Count - 1] += "cos";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_celchast")
+                                            {
+                                                translator2[translator2.Count - 1] += "(int)";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_drobchast")
+                                            {
+                                                translator2[translator2.Count - 1] += vtoroyyazyk[o + 1] + "(int)";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_kor")
+                                            {
+                                                translator2[translator2.Count - 1] += "sqrt";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_stepen")
+                                            {
+                                                translator2[translator2.Count - 1] += "pow";
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_plusodin")
+                                            {
+                                                translator2[translator2.Count - 1] += "1+" + vtoroyyazyk[o + 1];
+                                            }
+                                            else if (vtoroyyazyk[o] == "@vstrfunk_kvadrat")
+                                            {
+                                                string s1 = vtoroyyazyk[o + 1];
+                                                string left = "pow(";
+                                                string right = "";
+                                                int balanser = 1;
+                                                int balanser2 = 0;
+                                                for (int j = 1; j < s1.Length; j++)
+                                                {
+                                                    if (balanser2 == 1)
+                                                    {
+                                                        right += s1[j];
+                                                        continue;
+                                                    }
 
+                                                    if (s1[j] == '(')
+                                                    {
+                                                        balanser++;
+                                                        left += s1[j];
+                                                    }
+                                                    else if (s1[j] == ')')
+                                                    {
+                                                        balanser--;
+                                                        if (balanser == 0)
+                                                        {
+                                                            balanser2 = 1;
+                                                            left += ",2)";
+                                                            continue;
+                                                        }
+                                                        left += s1[j];
+                                                    }
+                                                    else left += s1[j];
+                                                }
+                                                translator2[translator2.Count - 1] += left + right;
+                                                o++;
+                                            }
+
+                                        }
+                                    }
+                                    else translator2[translator2.Count - 1] += vtoroyyazyk[o];
+                                }
+                                //       Console.WriteLine(vtoroyyazyk[o]);
                             }
 
                         }
+
+                    }
                     if (name2 == "C#")
                         for (int i = 0; i < 3; i++)
                             translator2.Add("}");
                     else if (name2 == "C/C++")
                         translator2.Add("}");
                 }
-                else translator2.Add("Данные языки находятся в разработке просим прощения");
-                Navigation.PushAsync(new PageTwo()); 
+
+
+
+                if (name2 == "C#")
+                {
+                    string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
+                                   ,"namespace ConsoleApp1","{","class Program","{","static void Main(string[] args)","{" };
+                    for (int i = 0; i < c.Length; i++)
+                        translator2.Add(c[i]);
+                    for (int i = 0; i < vtoroy_yazuk.Count; i += 2)
+                    {
+                        if (vtoroy_yazuk[i].Substring(0, 13) == "@obyavl #arr ")
+                        {
+                            int[] a = new int[10], b = new int[10];
+                            // int[] a, b, c;  a = new int[3]; b = new int[4]; c = new int[5];
+                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0] + "[]");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (translator22.Length > 1)
+                            {
+                                translator2[translator2.Count - 1] += string.Join(",", translator22) + "; ";
+                                for (int j = 0; j < translator22.Length; j++)
+                                {
+                                    translator2[translator2.Count - 1] += translator22[j] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ";";
+                                }
+                            }
+                            else
+                            {
+                                translator2[translator2.Count - 1] += translator22[0] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]";
+                            }
+                        }
+                        else if (vtoroy_yazuk[i].Substring(0, 16) == "@obyavl #arr_2D ")
+                        {
+                            //int[,] a = new int[10, 12];
+                            // int[] a, b, c;  a = new int[3]; b = new int[4]; c = new int[5];
+                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0] + "[,]");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (translator22.Length > 1)
+                            {
+                                translator2[translator2.Count - 1] += string.Join(",", translator22) + "; ";
+                                for (int j = 0; j < translator22.Length; j++)
+                                {
+                                    translator2[translator2.Count - 1] += translator22[j] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "," + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ";";
+                                }
+                            }
+                            else
+                            {
+                                translator2[translator2.Count - 1] += translator22[0] + " = new " + massiv(vtoroy_yazuk, i, name2)[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "," + massiv(vtoroy_yazuk, i, name2)[2] + "]";
+                            }
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_32 ")
+                        {
+                            translator2.Add("int "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #drob_48 ")
+                        {
+                            translator2.Add("double "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_8 ")
+                        {
+                            translator2.Add("byte "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_8 ")
+                        {
+                            translator2.Add("sbyte "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_16 ")
+                        {
+                            translator2.Add("short "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_16 ")
+                        {
+                            translator2.Add("ushort "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_64 ")
+                        {
+                            translator2.Add("long ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_32 ")
+                        {
+                            translator2.Add("uint ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_32 ")
+                        {
+                            translator2.Add("uint ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #simv_16 ")
+                        {
+                            translator2.Add("char "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #drob_64 ")
+                        {
+                            translator2.Add("double "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #drob_32 ")
+                        {
+                            translator2.Add("float "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #logic ")
+                        {
+                            translator2.Add("bool "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #string ")
+                        {
+                            translator2.Add("string "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_64 ")
+                        {
+                                translator2.Add("ulong ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #neyavn ")
+                        {
+                            translator2.Add("var "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if ((int)translator22[1][0] == 39)
+                            {
+                                if (translator22[1].Length > 3) //translator2[translator2.Count - 1] += string.Join("", translator22) + ";";
+                                {
+                                    string zamec = "";
+                                    for (int j = 0; j < translator22[1].Length; j++)
+                                    {
+                                        if (translator22[1][j] == '\'')
+                                            zamec += '\"';
+                                        else zamec += translator22[1][j];
+                                    }
+                                    translator22[1] = zamec;
+                                }
+                            }
+                            translator2[translator2.Count - 1] += string.Join("=", translator22) + ";";
+                        }
+                    }
+                }
+
+
+
+
+
+                else if (name2 == "C/C++")
+                {
+                    string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
+                    for (int i = 0; i < c.Length; i++)
+                        translator2.Add(c[i]);
+                    for (int i = 0; i < vtoroy_yazuk.Count; i += 2)
+                    {
+                        if (vtoroy_yazuk[i].Substring(0, 13) == "@obyavl #arr ")
+                        {
+                            {
+                                translator2.Add(massiv(vtoroy_yazuk, i, name2)[0]);
+                                //long A[10], b[10],c[10];
+                                string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                if (translator22.Length > 1)
+                                {
+                                    for (int j = 0; j < translator22.Length; j++)
+                                    {
+                                        if (j < translator22.Length - 1)
+                                            translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ", ";
+                                        else
+                                            translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ";";
+                                    }
+                                }
+                                else
+                                    translator2[translator2.Count - 1] += translator22[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + ";";
+                            }
+                            // translator2.Add(massiv(vtoroy_yazuk, i)[0]); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            // translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i].Substring(0, 16) == "@obyavl #arr_2D ")
+                        {
+                            translator2.Add(massiv(vtoroy_yazuk, i, name2)[0]);
+                            //int a[10][12],b[15][13];
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (translator22.Length > 1)
+                            {
+                                for (int j = 0; j < translator22.Length; j++)
+                                {
+                                    if (j < translator22.Length - 1)
+                                        translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + "[" + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ", ";
+                                    else
+                                        translator2[translator2.Count - 1] += translator22[j] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + "[" + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ";";
+                                }
+                            }
+                            else
+                                translator2[translator2.Count - 1] += translator22[0] + "[" + massiv(vtoroy_yazuk, i, name2)[1] + "]" + "[" + massiv(vtoroy_yazuk, i, name2)[2] + "]" + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_32 ")
+                        {
+                            translator2.Add("int "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #drob_48 ")
+                        {
+                            translator2.Add("double "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_8 ")
+                        {
+                            translator2.Add("byte "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_8 ")
+                        {
+                            translator2.Add("sbyte "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_16 ")
+                        {
+                            translator2.Add("short "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_16 ")
+                        {
+                            translator2.Add("ushort "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #cel_64 ")
+                        {
+                            translator2.Add("long long ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_32 ")
+                        {
+                            translator2.Add("unsigned long ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_32 ")
+                        {
+                            translator2.Add("unsigned long ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #simv_16 ")
+                        {
+                            translator2.Add("char "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #drob_64 ")
+                        {
+                            translator2.Add("double "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #drob_32 ")
+                        {
+                            translator2.Add("float "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #logic ")
+                        {
+                            translator2.Add("bool "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #string ")
+                        {
+                            translator2.Add("string "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #u_cel_64 ")
+                        {
+                            translator2.Add("unsigned long long ");
+                            string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            translator2[translator2.Count - 1] += string.Join(",", translator22) + ";";
+                        }
+                        else if (vtoroy_yazuk[i] == "@obyavl #neyavn ")
+                        {
+                            translator2.Add("var "); string[] translator22 = vtoroy_yazuk[i + 1].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            if ((int)translator22[1][0] == 39)
+                            {
+                                if (translator22[1].Length > 3) //translator2[translator2.Count - 1] += string.Join("", translator22) + ";";
+                                {
+                                    string zamec = "";
+                                    for (int j = 0; j < translator22[1].Length; j++)
+                                    {
+                                        if (translator22[1][j] == '\'')
+                                            zamec += '\"';
+                                        else zamec += translator22[1][j];
+                                    }
+                                    translator22[1] = zamec;
+                                }
+                            }
+                            translator2[translator2.Count - 1] += string.Join("=", translator22) + ";";
+                        }
+                    }
+                }
+                else translator2.Add("Данные языки находятся в разработке, просим прощения");
+                Navigation.PushAsync(new PageTwo());
             }
             else if (name1 == name2 && name1 != "" && name2 != "")
             {
@@ -1636,7 +1649,7 @@ namespace Translate_program
             {
                 DisplayAlert("                 Ошибка!", "Не введен код", "ОK");
             }
-            else if(translator.Count == 0)
+            else if (translator.Count == 0)
             {
                 DisplayAlert("                 Ошибка!", "Вы не ввели текст", "ОK");
             }
