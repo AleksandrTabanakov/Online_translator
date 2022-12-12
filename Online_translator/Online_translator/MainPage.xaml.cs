@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -1956,21 +1956,21 @@ namespace Translate_program
             }
         }
         static void includeLibrary(string name2, ref List<string> translator2)
+        {
+            if (name2 == "C#")
             {
-                if (name2 == "C#")
-                {
-                    string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
+                string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
                         ,"namespace ConsoleApp1","{","class Program","{","static void Main(string[] args)","{" };
-                    for (int i = 0; i < c.Length; i++)
-                        translator2.Add(c[i]);
-                }
-                else if (name2 == "C/C++")
-                {
-                    string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
-                    for (int i = 0; i < c.Length; i++)
-                        translator2.Add(c[i]);
-                }
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
             }
+            else if (name2 == "C/C++")
+            {
+                string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
+            }
+        }
 
         bool inOut(string c, ref List<string> translator2)
         {
@@ -2781,4 +2781,3 @@ namespace Translate_program
         }
     }
 }
-
