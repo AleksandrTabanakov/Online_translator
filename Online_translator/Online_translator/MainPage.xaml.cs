@@ -53,12 +53,13 @@ namespace Translate_program
 
 
         }
-     
+
         private void ClearBox(object sender, EventArgs e)
         {
             translator.Clear();
             Editor2.Text = null;
         }
+
         private void Translate(object sender, EventArgs e)
         {
 
@@ -115,12 +116,12 @@ namespace Translate_program
                             obrabotkaFigure(ref vvod, ref stroka, ref razdeltel2, j);
                             continue;
                         }
-                            vvod += stroka[j]; 
+                        vvod += stroka[j];
                         if (stroka[j] == ';')
                         {
                             lishnee(ref vvod, ref razdeltel2);
                         }
-                       
+
                     }
                     if (vvod != "")
                     {
@@ -129,7 +130,6 @@ namespace Translate_program
                 }
 
                 //_____________________________________________________________________________________________________________________________________________________________________________
-               
                 
                     List<string> razdeltel = new List<string>();
                     //Разделение на до бегин зен енд;
@@ -1930,31 +1930,6 @@ namespace Translate_program
                     translator2.Add(c[i]);
             }
         }
-        void translate(ref string stroka)
-        {
-            stroka = stroka.Trim();
-            StringBuilder str = new StringBuilder();
-            if (stroka == "")
-                return;
-            str.Append(stroka[0]);
-            for (int st = 1; st < stroka.Length; st++)
-            {
-                if (stroka[st] == ' ' && stroka[st - 1] == ' ')
-                    continue;
-                str.Append(stroka[st]);
-            }
-            stroka = str.ToString();
-        }
-                for (int i = 0; i < c.Length; i++)
-                    translator2.Add(c[i]);
-            }
-            else if (name2 == "C/C++")
-            {
-                string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
-                for (int i = 0; i < c.Length; i++)
-                    translator2.Add(c[i]);
-            }
-        }
 
         bool inOut(string c, ref List<string> translator2)
         {
@@ -2151,6 +2126,21 @@ namespace Translate_program
                     }
             }
 
+        }
+        void translate(ref string stroka)
+        {
+            stroka = stroka.Trim();
+            StringBuilder str = new StringBuilder();
+            if (stroka == "")
+                return;
+            str.Append(stroka[0]);
+            for (int st = 1; st < stroka.Length; st++)
+            {
+                if (stroka[st] == ' ' && stroka[st - 1] == ' ')
+                    continue;
+                str.Append(stroka[st]);
+            }
+            stroka = str.ToString();
         }
         void lishnee(ref string vvod, ref List<string> razdeltel2)
         {
