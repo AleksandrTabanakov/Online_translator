@@ -53,13 +53,12 @@ namespace Translate_program
 
 
         }
-
+     
         private void ClearBox(object sender, EventArgs e)
         {
             translator.Clear();
             Editor2.Text = null;
         }
-
         private void Translate(object sender, EventArgs e)
         {
 
@@ -108,70 +107,30 @@ namespace Translate_program
                 for (int i = 0; i < translator.Count; i++)
                 {
                     string stroka = translator[i];
-                    stroka = stroka.Trim();
-                    StringBuilder str = new StringBuilder();
-                    if (stroka == "")
-                        continue;
-                    str.Append(stroka[0]);
-                    for (int st = 1; st < stroka.Length; st++)
-                    {
-                        if (stroka[st] == ' ' && stroka[st - 1] == ' ')
-                            continue;
-                        str.Append(stroka[st]);
-                    }
-                    stroka = str.ToString();
+                    translate(ref stroka);
                     for (int j = 0; j < stroka.Length; j++)
                     {
                         if (stroka[j] == '{' || stroka[j] == '}')
                         {
-                            if (vvod != "")
-                            {
-                                while (vvod[vvod.Length - 1] == ' ')
-                                {
-                                    vvod = vvod.Remove(vvod.Length - 1);
-                                    if (vvod == "")
-                                        break;
-                                }
-                                razdeltel2.Add(vvod);
-                                if (stroka[j] == '{')
-                                    vvod = "//";
-                                else vvod = "";
-                            }
-                            else
-                            {
-                                vvod += stroka[j];
-                                while (vvod[vvod.Length - 1] == ' ')
-                                    vvod = vvod.Remove(vvod.Length - 1);
-                                vvod = "//";
-
-                            }
+                            obrabotkaFigure(ref vvod, ref stroka, ref razdeltel2, j);
                             continue;
                         }
+                            vvod += stroka[j]; 
                         if (stroka[j] == ';')
                         {
-                            vvod += stroka[j];
-                            while (vvod[vvod.Length - 1] == ' ')
-                                vvod = vvod.Remove(vvod.Length - 1);
-                            razdeltel2.Add(vvod);
-                            vvod = "";
+                            lishnee(ref vvod, ref razdeltel2);
                         }
-                        else
-                        {
-                            vvod += stroka[j];
-                        }
+                       
                     }
                     if (vvod != "")
                     {
-                        while (vvod[vvod.Length - 1] == ' ')
-                            vvod = vvod.Remove(vvod.Length - 1);
-                        razdeltel2.Add(vvod);
-                        vvod = "";
+                        lishnee(ref vvod, ref razdeltel2);
                     }
                 }
 
                 //_____________________________________________________________________________________________________________________________________________________________________________
-                if (name1 == "Pascal")
-                {
+               
+                
                     List<string> razdeltel = new List<string>();
                     //Разделение на до бегин зен енд;
                     string stroka3 = "";
@@ -1797,7 +1756,7 @@ namespace Translate_program
                     //    else left += s1[j];
                     //translator2[translator2.Count - 1] += left + right;
                     //o++; 
-                }
+                
 
 
 
@@ -1956,22 +1915,36 @@ namespace Translate_program
             }
         }
         static void includeLibrary(string name2, ref List<string> translator2)
+        {
+            if (name2 == "C#")
             {
-                if (name2 == "C#")
-                {
-                    string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
+                string[] c = { "using System;", "using System.Collections.Generic;", "using System.Linq;", "using System.Text;", "using System.Threading.Tasks;",  "using System.IO;"
                         ,"namespace ConsoleApp1","{","class Program","{","static void Main(string[] args)","{" };
-                    for (int i = 0; i < c.Length; i++)
-                        translator2.Add(c[i]);
-                }
-                else if (name2 == "C/C++")
-                {
-                    string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
-                    for (int i = 0; i < c.Length; i++)
-                        translator2.Add(c[i]);
-                }
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
             }
-
+            else if (name2 == "C/C++")
+            {
+                string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
+            }
+        }
+        void translate(ref string stroka)
+        {
+            stroka = stroka.Trim();
+            StringBuilder str = new StringBuilder();
+            if (stroka == "")
+                return;
+            str.Append(stroka[0]);
+            for (int st = 1; st < stroka.Length; st++)
+            {
+                if (stroka[st] == ' ' && stroka[st - 1] == ' ')
+                    continue;
+                str.Append(stroka[st]);
+            }
+            stroka = str.ToString();
+        }
         bool inOut(string c, ref List<string> translator2)
         {
             string vivod = "";
@@ -2167,6 +2140,36 @@ namespace Translate_program
                     }
             }
 
+        }
+        void lishnee(ref string vvod, ref List<string> razdeltel2)
+        {
+            while (vvod[vvod.Length - 1] == ' ')
+                vvod = vvod.Remove(vvod.Length - 1);
+            razdeltel2.Add(vvod);
+            vvod = "";
+        }
+        void obrabotkaFigure(ref string vvod, ref string stroka, ref List<string> razdeltel2, int j)
+        {
+            if (vvod != "")
+            {
+                while (vvod[vvod.Length - 1] == ' ')
+                {
+                    vvod = vvod.Remove(vvod.Length - 1);
+                    if (vvod == "")
+                        break;
+                }
+                razdeltel2.Add(vvod);
+                if (stroka[j] == '{')
+                    vvod = "//";
+                else vvod = "";
+            }
+            else
+            {
+                vvod += stroka[j];
+                while (vvod[vvod.Length - 1] == ' ')
+                    vvod = vvod.Remove(vvod.Length - 1);
+                vvod = "//";
+            }
         }
         static void To_downto(string[] rof, ref string na_obchem3, ref string na_obchem4, int i, int ind)
         {
@@ -2781,4 +2784,3 @@ namespace Translate_program
         }
     }
 }
-
