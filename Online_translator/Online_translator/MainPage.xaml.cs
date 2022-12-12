@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -1945,6 +1945,17 @@ namespace Translate_program
             }
             stroka = str.ToString();
         }
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
+            }
+            else if (name2 == "C/C++")
+            {
+                string[] c = { "#include <iostream>", "#include<fstream>", "#include <Windows.h>", "#include<string>", "#include<cmath>", "#include<conio.h>", "using namespace std;", "int main()", "{", "setlocale(LC_ALL, \"RUSSIAN\");" };
+                for (int i = 0; i < c.Length; i++)
+                    translator2.Add(c[i]);
+            }
+        }
+
         bool inOut(string c, ref List<string> translator2)
         {
             string vivod = "";
