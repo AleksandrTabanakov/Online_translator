@@ -2,21 +2,17 @@
     
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-x:Class="Translate_program.MainPage">
+x:Class="Translate_program.MainPage" NavigationPage.HasNavigationBar="False" Background="#898cbf">
 
-    <StackLayout>
-        <Label Text="Выберите нужные вам языки" FontSize="21" TextColor="Black" Padding="30,10,30,10"/>
-        <Label Text="Перевод с:" TextColor="Black" FontSize="Large" />
-        <Picker x:Name="Picker1" Margin="115,-40,0,-40" SelectedIndexChanged="Baraban" >
+    <ScrollView>
+        <StackLayout Orientation="Vertical">
 
-            <Picker.Items>
-                <x:String>C#</x:String>
-                <x:String>C/C++</x:String>
-                <x:String>Pascal</x:String>
-            </Picker.Items>
-        </Picker>
-        <Label Text="Перевод на:" TextColor="Black" FontSize="Large" Margin="0,70,0,0" />
-        <Picker Margin="130,-40,0,-40" SelectedIndexChanged="Baraban2" x:Name="Picker2">
+            <Label BackgroundColor="#3a5595" Text="Welcome to translator!" TextColor="#000000" FontSize="20" Padding="10,20,0,20" />
+            <Button Text ="FAQ" TextTransform="Uppercase" Margin="260,-55,0,10" TextColor="#000000"
+             Clicked="FAQ" FontSize="Caption" BackgroundColor="#5a4372" CornerRadius="40" HeightRequest="35" />
+            <Label Text="Выберите нужные вам языки" FontSize="21" TextColor="#000000" Padding="30,10,30,10"/>
+            <Label Text="Перевод с:" TextColor="#000000" FontSize="Large" />
+            <Picker x:Name="Picker1" Margin="160,-45,0,-40" TextColor="#000000" SelectedIndexChanged="SelectorUp" >
 
             <Picker.Items>
                 <x:String>C#</x:String>
@@ -24,17 +20,25 @@ x:Class="Translate_program.MainPage">
                 <x:String>Pascal</x:String>
             </Picker.Items>
         </Picker>
-        <Editor BackgroundColor="White" Margin="0,70,0,0" Placeholder="Введите текст" x:Name="Editor2" Completed="Baraban3" />
-        <Button Text ="перевести ->" TextTransform="Uppercase" Margin="190,10,0,10" TextColor="White"
+            <Label Text="Перевод на:" TextColor="#000000" FontSize="Large" Margin="0,70,0,0" />
+            <Picker Margin="175,-45,0,-40" TextColor="#000000" SelectedIndexChanged="SelectorDown" x:Name="Picker2">
+                <Picker.Items>
+                <x:String>C#</x:String>
+                <x:String>C/C++</x:String>
+                <x:String>Pascal</x:String>
+            </Picker.Items>
+        </Picker>
+
+            <Editor  BackgroundColor="#7a7db5" TextColor="#000000" Margin="0,70,0,0" Placeholder="Введите текст:"  PlaceholderColor="#000000" x:Name="Editor2" Completed="EditorCode" />
+            <Grid>
+                <Button Text="удалить код" Grid.Row="0" Grid.Column="0"  TextTransform="Uppercase"  TextColor="#000000"
+                Padding="0,0,0,0"
+                Clicked="ClearBox" FontSize="Caption" BackgroundColor="#5a4372"></Button>
+                <Button Text="перевести ->" Grid.Row="0" Grid.Column="1"  TextTransform="Uppercase"  TextColor="#000000"
 Padding="0,0,0,0"
-Clicked="Button_Clicked" FontSize="Caption" BackgroundColor="#7f3375"/>
-    
-        <FlexLayout>
+Clicked="Translate" FontSize="Caption" BackgroundColor="#5a4372"></Button>
+            </Grid>
 
-
-        </FlexLayout>    <ScrollView>
-            <StackLayout Orientation="Horizontal">
-            </StackLayout>
-        </ScrollView>
-    </StackLayout>
+        </StackLayout>  
+    </ScrollView>
 </ContentPage>
