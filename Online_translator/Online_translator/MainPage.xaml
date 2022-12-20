@@ -29,7 +29,7 @@ x:Class="Translate_program.MainPage" NavigationPage.HasNavigationBar="False" Bac
             </Picker.Items>
         </Picker>
 
-            <Editor  BackgroundColor="#7a7db5" TextColor="#000000" Margin="0,70,0,0" Placeholder="Введите текст:"  PlaceholderColor="#000000" x:Name="Editor2" Completed="editorCode" />
+            <Editor  BackgroundColor="#7a7db5" TextColor="#000000" Margin="0,70,0,0" Placeholder="Введите текст:"  PlaceholderColor="#000000" x:Name="Editor2" Completed="EditorCode" />
             <Grid>
                 <Button Text="удалить код" Grid.Row="0" Grid.Column="0"  TextTransform="Uppercase"  TextColor="#000000"
                 Padding="0,0,0,0"
